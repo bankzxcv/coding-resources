@@ -2,7 +2,7 @@
 <jsp:include page="../include/header.jsp"/>
 
 <main class="container d-flex flex-column align-items-center pt-5">
-    <form class="border p-4 rounded-2">
+    <form action="/user/login" method="post" class="border p-4 rounded-2">
         <div class="mb-3">
             <label for="emailId" class="form-label">Email address</label>
             <input type="email"
