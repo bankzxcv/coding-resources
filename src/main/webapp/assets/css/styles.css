@@ -1,0 +1,71 @@
+body {
+    font-family: "Inter", sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: "DM Serif Display", serif;
+}
+
+.btn-primary {
+    background-color: #12b680;
+    border-color: #12a977;
+}
+
+.btn-primary:hover {
+    background-color: #0f9e6f;
+    border-color: #0f9e6f;
+}
+
+.btn-secondary {
+    background-color: #ff914d;
+    border-color: #ec8647;
+}
+
+.btn-secondary:hover {
+    background-color: #e58447;
+    border-color: #df7e42;
+}
+
+.chip {
+    background-color: #f3f3f3;
+    padding: 3px 10px;
+    border-radius: 30px;
+    text-decoration: none;
+    font-size: 12px;
+    box-shadow: rgba(0, 0, 0, 0.15) 1.45px 1.45px 2.4px;
+}
+
+.chip:hover {
+    background-color: #eaeaea;
+    box-shadow: rgba(0, 0, 0, 0.15) 1px 1px 2px;
+}
+
+.resource-img {
+    object-fit: contain;
+    width: 100%;
+}
+
+.card {
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.card:hover {
+    cursor: pointer;
+}
+
+.nav-item {
+    font-family: "Inter", sans-serif;
+    font-size: 22px;
+}
+
+/*  Log In Form */
+
+form {
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    padding: 20px 40px;
+}
