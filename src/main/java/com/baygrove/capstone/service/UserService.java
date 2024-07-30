@@ -25,7 +25,7 @@ public class UserService {
         user.setEmail(form.getEmail());
         String encryptedPassword = passwordEncoder.encode(form.getPassword());
         user.setPassword(encryptedPassword);
-        user.setCreateDate(new Date());
+        user.setCreatedAt(new Date());
         userDAO.save(user);
 
         return user;
