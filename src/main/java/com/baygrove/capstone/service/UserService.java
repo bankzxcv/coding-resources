@@ -23,8 +23,11 @@ public class UserService {
     public User createUser(CreateUserFormBean form) {
         User user = new User();
         user.setEmail(form.getEmail());
+        user.setUsername(form.getUsername());
+
         String encryptedPassword = passwordEncoder.encode(form.getPassword());
         user.setPassword(encryptedPassword);
+
         user.setCreatedAt(new Date());
         userDAO.save(user);
 
