@@ -20,17 +20,17 @@ public class SpringSecurity {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
         http.csrf(Customizer.withDefaults());
-        // http.csrf(csrf -> csrf.disable());
+//        http.csrf(csrf -> csrf.disable());
 
         http.authorizeRequests()
                 .requestMatchers(
                         new AntPathRequestMatcher("/admin/**"),
-                        new AntPathRequestMatcher("/user/**")).authenticated()
+                        new AntPathRequestMatcher("/account/**")).authenticated()
                 .anyRequest().permitAll();
 
         http.formLogin(formLogin -> formLogin
                 .loginPage("/user/login") // GET
-                .loginProcessingUrl("/user/login") // POST
+                .loginProcessingUrl("/user/login-process") // POST
         );
 
         http.logout(formLogout -> formLogout
