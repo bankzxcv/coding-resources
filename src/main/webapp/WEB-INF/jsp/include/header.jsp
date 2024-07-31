@@ -1,3 +1,5 @@
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -72,12 +74,29 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">All Resources</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/login">Log In</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user/signup">Sign Up</a>
-                </li>
+                <sec:authorize access="!isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link px-3 btn btn-primary text-white" href="/user/login">Log In</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link px-3 btn btn-outline-secondary mx-2" href="/user/signup">Sign Up</a>
+                    </li>
+                </sec:authorize>
+                <sec:authorize access="isAuthenticated()">
+                    <sec:authorize access="hasAuthority('ADMIN')">
+                        <li class="nav-item mx-2">
+                            <a class="nav-link px-3 text-center btn btn-primary"
+                               href="/admin/dashboard">Admin Dashboard</a>
+                        </li>
+                    </sec:authorize>
+                    <li class="nav-item flex-row-center-center">
+                        <span class="nav-link fs-6"><sec:authentication property="name"/></span>
+                    </li>
+                    <form class="flex-row-center-center" action="/user/logout" method="post">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                        <input class="nav-item px-3 btn btn-outline-secondary" type="submit" value="Log Out"/>
+                    </form>
+                </sec:authorize>
             </ul>
         </div>
     </div>

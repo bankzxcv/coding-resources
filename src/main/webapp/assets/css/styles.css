@@ -12,13 +12,27 @@ h6 {
 }
 
 .btn-primary {
-    background-color: #12b680;
-    border-color: #12a977;
+    /*background-color: #12b680;*/
+    /*border-color: #12a977;*/
+    background-color: #11ab78;
+    border-color: #109b6d;
+    color: #fff;
+
 }
 
 .btn-primary:hover {
     background-color: #0f9e6f;
     border-color: #0f9e6f;
+    color: #fff;
+}
+
+.btn-outline-primary {
+    color: #0e9a6c;
+    border-color: #0e9a6c;
+}
+
+.btn-outline-primary:hover {
+    border-color: #0e9a6c;
 }
 
 .btn-secondary {
@@ -29,6 +43,17 @@ h6 {
 .btn-secondary:hover {
     background-color: #e58447;
     border-color: #df7e42;
+}
+
+.btn-outline-secondary {
+    border-color: #df7e42;
+    color: #df7e42;
+}
+
+.btn-outline-secondary:hover {
+    background-color: #d3753a;
+    border-color: #d3753a;
+    color: #fff;
 }
 
 .chip {
@@ -60,12 +85,20 @@ h6 {
 
 .nav-item {
     font-family: "Inter", sans-serif;
-    font-size: 22px;
+    font-size: 18px;
 }
 
 /*  Log In Form */
 
-form {
+#log-in-form, #sign-up-form {
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
     padding: 20px 40px;
 }
+
+.flex-row-center-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
