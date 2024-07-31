@@ -2,7 +2,7 @@
 <jsp:include page="../include/header.jsp"/>
 
 <main class="container d-flex flex-column align-items-center pt-5">
-    <form action="/user/signup" method="post" class="border p-4 rounded-2">
+    <form id="sign-up-form" action="/user/signup" method="post" class="border p-4 rounded-2">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="mb-3">
             <label for="emailId" class="form-label">Email</label>
