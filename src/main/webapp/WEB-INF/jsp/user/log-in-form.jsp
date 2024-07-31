@@ -2,6 +2,9 @@
 <jsp:include page="../include/header.jsp"/>
 
 <main class="container d-flex flex-column align-items-center pt-5">
+    <c:if test="${param['error'] eq ''}">
+        <div class="alert alert-danger d-inline w-40" role="alert">Invalid Email or Password</div>
+    </c:if>
     <form id="log-in-form" action="/user/login-process" method="post" class="border p-4 rounded-2">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <div class="mb-3">
