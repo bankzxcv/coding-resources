@@ -23,7 +23,7 @@
     />
 
     <link rel="stylesheet" href="/assets/css/styles.css"/>
-    <title>Learn Programming Resources</title>
+    <title>Learn Coding Resources</title>
 </head>
 <body>
 <!-- Nav Bar -->
