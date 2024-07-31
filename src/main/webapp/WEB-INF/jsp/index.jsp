@@ -1,70 +1,68 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="include/header.jsp"/>
 
 <main class="container d-flex flex-column align-items-center pt-5">
-    <div
-            role="link"
-            target="_blank"
-            onclick=" window.open('./resource.html', '_blank').focus();"
-            class="card my-2"
-    >
-        <div class="row g-0">
-            <div
-                    class="col-md-4 d-flex justify-content-center align-items-center"
-            >
-                <img
-                        class="resource-img"
-                        src="/assets/img/resources/FreeCodeCamp.webp"
-                        class="rounded-start"
-                        alt="..."
-                />
-            </div>
+    <c:forEach items="${resources}" var="resource">
+        <div
+                role="link"
+                target="_blank"
+                onclick=" window.open('./resource.html', '_blank').focus();"
+                class="card my-2"
+        >
+            <div class="row g-0">
+                <div
+                        class="col-md-4 d-flex justify-content-center align-items-center"
+                >
+                    <img
+                            class="resource-img"
+                            src="${resource.imageUrl}"
+                            class="rounded-start"
+                            alt="..."
+                    />
+                </div>
 
-            <div class="col-md-8">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h2 class="card-title">FreeCodeCamp</h2>
-                        <a href="#" class="btn btn-primary">+ ADD TO LIST</a>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <h2 class="card-title">${resource.name}</h2>
+                            <a href="#" class="btn btn-primary">+ ADD TO LIST</a>
+                        </div>
+                        <p class="card-text">
+                                ${resource.description}
+                        </p>
+                        <div class="card-text gap-1 d-flex justify-content-end">
+                            <a
+                                    href="${resource.url}"
+                                    target="_blank"
+                                    class="btn btn-secondary"
+                                    onclick="event.stopPropagation();"
+                            >START LEARNING</a
+                            >
+                            <a
+                                    href="./resource.html"
+                                    target="_blank"
+                                    class="btn btn-outline-secondary"
+                                    onclick="event.stopPropagation();"
+                            >MORE INFO</a
+                            >
+                        </div>
+                        <p class="card-text mt-3 gap-1 d-flex justify-content-end">
+                            <a href="#" class="text-muted chip">HTML</a>
+                            <a href="#" class="text-muted chip">CSS</a>
+                            <a href="#" class="text-muted chip">JavaScript</a>
+                            <a href="#" class="text-muted chip">Data Visualization</a>
+                            <a href="#" class="text-muted chip"
+                            >Data Analysis with Python</a
+                            >
+                        </p>
                     </div>
-                    <p class="card-text">
-                        FreeCodeCamp offers a free, extensive curriculum for learning
-                        web development and programming, including HTML, CSS,
-                        JavaScript, and various other technologies. It provides hands-on
-                        coding exercises, real-world projects, and certifications upon
-                        completion. The platform also features a supportive community
-                        and resources to help learners build practical skills and
-                        prepare for tech careers.
-                    </p>
-                    <div class="card-text gap-1 d-flex justify-content-end">
-                        <a
-                                href="https://www.freecodecamp.org/learn/"
-                                target="_blank"
-                                class="btn btn-secondary"
-                                onclick="event.stopPropagation();"
-                        >START LEARNING</a
-                        >
-                        <a
-                                href="./resource.html"
-                                target="_blank"
-                                class="btn btn-outline-secondary"
-                                onclick="event.stopPropagation();"
-                        >MORE INFO</a
-                        >
-                    </div>
-                    <p class="card-text mt-3 gap-1 d-flex justify-content-end">
-                        <a href="#" class="text-muted chip">HTML</a>
-                        <a href="#" class="text-muted chip">CSS</a>
-                        <a href="#" class="text-muted chip">JavaScript</a>
-                        <a href="#" class="text-muted chip">Data Visualization</a>
-                        <a href="#" class="text-muted chip"
-                        >Data Analysis with Python</a
-                        >
-                    </p>
                 </div>
             </div>
+
+
         </div>
+    </c:forEach>
 
-
-    </div>
     <div class="card my-2">
         <div class="row g-0">
             <div
