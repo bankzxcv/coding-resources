@@ -1,10 +1,12 @@
 package com.baygrove.capstone.controller;
 
 import com.baygrove.capstone.database.dao.UserDAO;
+import com.baygrove.capstone.database.entity.User;
 import com.baygrove.capstone.form.CreateUserFormBean;
 import com.baygrove.capstone.security.AuthenticatedUserUtilities;
 import com.baygrove.capstone.service.UserService;
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +17,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import jakarta.validation.Valid;
 
 
 @Slf4j
@@ -57,7 +58,8 @@ public class UserController {
             return response;
         }
 
-        userService.createUser(form);
+        User user = userService.createUser(form);
+        userService.createUserRole(user.getId(), "USER");
 
         // Authenticate the user after creating account
         authenticatedUserUtilities.manualAuthentication(session, form.getEmail(), form.getPassword());

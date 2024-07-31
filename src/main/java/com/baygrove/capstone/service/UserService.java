@@ -2,7 +2,9 @@ package com.baygrove.capstone.service;
 
 
 import com.baygrove.capstone.database.dao.UserDAO;
+import com.baygrove.capstone.database.dao.UserRoleDAO;
 import com.baygrove.capstone.database.entity.User;
+import com.baygrove.capstone.database.entity.UserRole;
 import com.baygrove.capstone.form.CreateUserFormBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +21,21 @@ public class UserService {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private UserRoleDAO userRoleDAO;
+
+    public UserRole createUserRole(Integer userId, String roleName) {
+        UserRole userRole = new UserRole();
+
+        userRole.setUserId(userId);
+        userRole.setRoleName(roleName);
+        userRole.setCreateDate(new Date());
+
+        userRoleDAO.save(userRole);
+
+        return userRole;
+    }
 
     public User createUser(CreateUserFormBean form) {
         User user = new User();
