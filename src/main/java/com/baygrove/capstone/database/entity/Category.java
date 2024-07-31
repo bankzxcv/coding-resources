@@ -4,6 +4,8 @@ package com.baygrove.capstone.database.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Setter
 @Getter
 @Entity
@@ -19,4 +21,8 @@ public class Category {
 
     @Column(name = "name")
     private String name;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ResourceCategory> resourceCategories;
 }
