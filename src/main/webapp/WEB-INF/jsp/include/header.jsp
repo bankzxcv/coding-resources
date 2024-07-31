@@ -30,7 +30,7 @@
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container">
         <a class="navbar-brand" href="#"
-        ><img src="/src/assets/img/logo/logo.png"
+        ><img src="/assets/img/logo/logo.png"
         /></a>
         <button
                 class="navbar-toggler"
