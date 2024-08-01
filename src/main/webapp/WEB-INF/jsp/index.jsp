@@ -48,8 +48,8 @@
                         </div>
 
                         <p class="card-text mt-3 gap-1 d-flex justify-content-end">
-                            <c:forEach items="${resource.resourceCategories}" var="resourceCategory">
-                                <a href="#" class="text-muted chip">${resourceCategory.category.name}</a>
+                            <c:forEach items="${resource.resourceTopics}" var="resourceTopic">
+                                <a href="#" class="text-muted chip">${resourceTopic.topic.name}</a>
                             </c:forEach>
                         </p>
                     </div>
