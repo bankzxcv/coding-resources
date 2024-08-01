@@ -45,4 +45,8 @@ public class Resource {
     @ToString.Exclude
     @OneToMany(mappedBy = "resource", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<ResourceCategory> resourceCategories;
+
+    @ToString.Exclude
+    @OneToMany(mappedBy = "resource", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<ResourceTopic> resourceTopics;
 }
