@@ -64,8 +64,37 @@
                         Categories
                     </a>
                     <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Computer Science</a></li>
                         <li><a class="dropdown-item" href="#">Web Development</a></li>
                         <li><a class="dropdown-item" href="#">Data Science</a></li>
+                        <li><a class="dropdown-item" href="#">Databases</a></li>
+                        <li><a class="dropdown-item" href="#">CI/DC</a></li>
+                        <li><a class="dropdown-item" href="#">Cloud Computing</a></li>
+                        <li>
+                            <a class="dropdown-item" href="#">Interview Preps</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a
+                            class="nav-link dropdown-toggle"
+                            href="#"
+                            role="button"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                    >
+                        Topics
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">HTML/CSS</a></li>
+                        <li><a class="dropdown-item" href="#">JavaScript</a></li>
+                        <li><a class="dropdown-item" href="#">TypeScript</a></li>
+                        <li><a class="dropdown-item" href="#">Python</a></li>
+                        <li><a class="dropdown-item" href="#">Java</a></li>
+                        <li><a class="dropdown-item" href="#">Ruby</a></li>
+                        <li><a class="dropdown-item" href="#">MySQL</a></li>
+                        <li><a class="dropdown-item" href="#">PostgreSQL</a></li>
+                        <li><a class="dropdown-item" href="#">MongoDB</a></li>
                         <li>
                             <a class="dropdown-item" href="#">Interview Preps</a>
                         </li>
