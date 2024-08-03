@@ -3,7 +3,8 @@
 
 
 <!-- Resource Form -->
-<form id="resource-form" action="/admin/submit-new-resource" method="post" style="width: 90%; max-width: 650px"
+<form id="resource-form" action="/admin/submit-new-resource" method="post" enctype="multipart/form-data"
+      style="width: 90%; max-width: 650px"
       class="border p-4 rounded-2">
     <h1 class="text-center mb-4">Resource</h1>
 
