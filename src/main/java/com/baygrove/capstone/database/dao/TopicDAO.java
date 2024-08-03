@@ -11,4 +11,8 @@ public interface TopicDAO extends JpaRepository<Topic, Long> {
 
     @Nonnull
     List<Topic> findAll();
+
+    List<Topic> findAllByOrderByIdAsc();
+    
+    List<Topic> findAllByOrderByNameAsc();
 }
