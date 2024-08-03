@@ -86,7 +86,8 @@
                         Topics
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">HTML/CSS</a></li>
+                        <li><a class="dropdown-item" href="#">HTML</a></li>
+                        <li><a class="dropdown-item" href="#">CSS</a></li>
                         <li><a class="dropdown-item" href="#">JavaScript</a></li>
                         <li><a class="dropdown-item" href="#">TypeScript</a></li>
                         <li><a class="dropdown-item" href="#">Python</a></li>
@@ -130,3 +131,4 @@
         </div>
     </div>
 </nav>
+<main class="container d-flex flex-column align-items-center pt-5">
