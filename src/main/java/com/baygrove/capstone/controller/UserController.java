@@ -2,7 +2,7 @@ package com.baygrove.capstone.controller;
 
 import com.baygrove.capstone.database.dao.UserDAO;
 import com.baygrove.capstone.database.entity.User;
-import com.baygrove.capstone.form.CreateUserFormBean;
+import com.baygrove.capstone.form.UserFormBean;
 import com.baygrove.capstone.security.AuthenticatedUserUtilities;
 import com.baygrove.capstone.service.UserService;
 import jakarta.servlet.http.HttpSession;
@@ -42,7 +42,7 @@ public class UserController {
     }
 
     @PostMapping("signup")
-    public ModelAndView createAccountSubmit(@Valid CreateUserFormBean form, BindingResult bindingResult, HttpSession session) {
+    public ModelAndView createAccountSubmit(@Valid UserFormBean form, BindingResult bindingResult, HttpSession session) {
 
         ModelAndView response = new ModelAndView("user/sign-up-form");
         log.info("submit form: " + form.toString());

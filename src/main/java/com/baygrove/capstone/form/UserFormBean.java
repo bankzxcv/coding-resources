@@ -10,7 +10,7 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-public class CreateUserFormBean {
+public class UserFormBean {
 
     private Integer id;
 
