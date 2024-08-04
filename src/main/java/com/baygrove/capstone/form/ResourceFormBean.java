@@ -25,12 +25,12 @@ public class ResourceFormBean {
 
     @NotEmpty
     private String description;
-    
+
     private MultipartFile imageFile;
 
     private String imageUrl;
 
-    private List<String> topics;
+    private List<Integer> topicIds;
 
     private String status;
 

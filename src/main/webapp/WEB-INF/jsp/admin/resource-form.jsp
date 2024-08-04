@@ -61,7 +61,7 @@
                 <input
                         class="form-check-input"
                         type="checkbox"
-                        name="topics"
+                        name="topicIds"
                         value="${topic.id}"
                         id="${topic.name.toLowerCase()}"
                 />
