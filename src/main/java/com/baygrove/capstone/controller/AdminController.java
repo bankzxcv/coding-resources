@@ -56,7 +56,7 @@ public class AdminController {
         return response;
     }
 
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("add-new-resource")
     public ModelAndView addNewResource() {
         ModelAndView response = new ModelAndView("admin/resource-form");
@@ -64,13 +64,12 @@ public class AdminController {
         return response;
     }
 
-
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/submit-new-resource")
     public ModelAndView submitNewResource(@Valid ResourceFormBean form, BindingResult bindingResult) {
         ModelAndView response = new ModelAndView();
 
         log.info("submit-new-resource form: " + form.toString());
-
 
         if (bindingResult.hasErrors()) {
             for (ObjectError error : bindingResult.getAllErrors()) {
