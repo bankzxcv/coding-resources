@@ -3,12 +3,11 @@ package com.baygrove.capstone.controller;
 
 import com.baygrove.capstone.database.dao.ResourceDAO;
 import com.baygrove.capstone.database.dao.TopicDAO;
-import com.baygrove.capstone.database.entity.Resource;
-import com.baygrove.capstone.database.entity.ResourceTopic;
 import com.baygrove.capstone.database.entity.Topic;
 import com.baygrove.capstone.database.entity.User;
 import com.baygrove.capstone.form.ResourceFormBean;
 import com.baygrove.capstone.security.AuthenticatedUserUtilities;
+import com.baygrove.capstone.service.ResourceService;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +21,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 @Slf4j
@@ -41,6 +35,9 @@ public class AdminController {
 
     @Autowired
     ResourceDAO resourceDAO;
+
+    @Autowired
+    ResourceService resourceService;
 
     private void addTopicsToReponse(ModelAndView response) {
         List<Topic> topics = topicDAO.findAllByOrderByNameAsc();
@@ -92,45 +89,10 @@ public class AdminController {
             return response;
         }
 
-
-        String saveProfileImageName = "./src/main/webapp/assets/img/resources/" + form.getImageFile().getOriginalFilename();
-        try {
-            Files.copy(form.getImageFile().getInputStream(), Paths.get(saveProfileImageName), StandardCopyOption.REPLACE_EXISTING);
-        } catch (Exception e) {
-            log.error("Unable to finish reading file", e);
-        }
-
-        String imageUrl = "/assets/img/resources/" + form.getImageFile().getOriginalFilename();
-
-        Resource resource = new Resource();
-
-        resource.setName(form.getName());
-        resource.setDescription(form.getDescription());
-        resource.setUrl(form.getUrl());
-        resource.setCreatedAt(new Date());
-        resource.setUpdatedAt(new Date());
-        resource.setImageUrl(imageUrl);
-        resource.setStatus("Pending"); // TODO: use Enum
-        resourceDAO.save(resource);
-
-        List<ResourceTopic> resourceTopics = new ArrayList<>();
-
-        for (Integer topicId : form.getTopicIds()) {
-            // find topic
-            Topic topic = topicDAO.findById(topicId);
-
-            // create resource topic
-            ResourceTopic resourceTopic = new ResourceTopic();
-            resourceTopic.setResource(resource);
-            resourceTopic.setTopic(topic);
-
-            resourceTopics.add(resourceTopic);
-        }
-
-        resource.setResourceTopics(resourceTopics);
-        resourceDAO.save(resource);
+        resourceService.createResource(form);
 
         response.setViewName("redirect:/");
+
         return response;
     }
 }
