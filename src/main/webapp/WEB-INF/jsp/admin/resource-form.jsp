@@ -34,7 +34,7 @@
     </div>
     <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <textarea value="${form.description}"
+        <textarea value="${form.description}" name="description"
                   class="form-control <c:if test="${bindingResult.hasFieldErrors('description')}">is-invalid</c:if>"
                   id="description" rows="5"></textarea>
         <c:if test="${bindingResult.hasFieldErrors('description')}">
@@ -62,7 +62,7 @@
                         class="form-check-input"
                         type="checkbox"
                         name="topics"
-                        value="1"
+                        value="${topic.id}"
                         id="${topic.name.toLowerCase()}"
                 />
                 <label class="form-check-label" for="${topic.name.toLowerCase()}"> ${topic.name} </label>
