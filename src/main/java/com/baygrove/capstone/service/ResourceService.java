@@ -10,6 +10,7 @@ import com.baygrove.capstone.form.ResourceFormBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -31,16 +32,20 @@ public class ResourceService {
     @Autowired
     TopicDAO topicDAO;
 
-    public Resource createResource(ResourceFormBean form) {
-        String saveProfileImageName = "./src/main/webapp/assets/img/resources/" + form.getImageFile().getOriginalFilename();
+    public String saveResourceImage(MultipartFile imageFile) {
+        String saveProfileImageName = "./src/main/webapp/assets/img/resources/" + imageFile.getOriginalFilename();
         try {
-            Files.copy(form.getImageFile().getInputStream(), Paths.get(saveProfileImageName), StandardCopyOption.REPLACE_EXISTING);
+            Files.copy(imageFile.getInputStream(), Paths.get(saveProfileImageName), StandardCopyOption.REPLACE_EXISTING);
         } catch (Exception e) {
             log.error("Unable to finish reading file", e);
         }
 
-        String imageUrl = "/assets/img/resources/" + form.getImageFile().getOriginalFilename();
+        String imageUrl = "/assets/img/resources/" + imageFile.getOriginalFilename();
 
+        return imageUrl;
+    }
+
+    public Resource createResource(ResourceFormBean form) {
         Resource resource = new Resource();
 
         resource.setName(form.getName());
@@ -48,11 +53,13 @@ public class ResourceService {
         resource.setUrl(form.getUrl());
         resource.setCreatedAt(new Date());
         resource.setUpdatedAt(new Date());
-        resource.setImageUrl(imageUrl);
         resource.setStatus("Pending"); // TODO: use Enum
-        
-        resourceDAO.save(resource);
 
+        String imageUrl = saveResourceImage(form.getImageFile());
+        resource.setImageUrl(imageUrl);
+
+        resourceDAO.save(resource);
+        
         List<ResourceTopic> resourceTopics = new ArrayList<>();
 
         for (Integer topicId : form.getTopicIds()) {
