@@ -45,6 +45,25 @@ public class ResourceService {
         return imageUrl;
     }
 
+    public List<ResourceTopic> createResourceTopics(Resource resource, List<Integer> topicIds) {
+        List<ResourceTopic> resourceTopics = new ArrayList<>();
+
+        for (Integer topicId : topicIds) {
+            // find topic
+            Topic topic = topicDAO.findById(topicId);
+
+            // create resource topic
+            ResourceTopic resourceTopic = new ResourceTopic();
+            resourceTopic.setResource(resource);
+            resourceTopic.setTopic(topic);
+
+            resourceTopics.add(resourceTopic);
+        }
+
+        return resourceTopics;
+    }
+
+
     public Resource createResource(ResourceFormBean form) {
         Resource resource = new Resource();
 
@@ -59,22 +78,10 @@ public class ResourceService {
         resource.setImageUrl(imageUrl);
 
         resourceDAO.save(resource);
-        
-        List<ResourceTopic> resourceTopics = new ArrayList<>();
 
-        for (Integer topicId : form.getTopicIds()) {
-            // find topic
-            Topic topic = topicDAO.findById(topicId);
-
-            // create resource topic
-            ResourceTopic resourceTopic = new ResourceTopic();
-            resourceTopic.setResource(resource);
-            resourceTopic.setTopic(topic);
-
-            resourceTopics.add(resourceTopic);
-        }
-
+        List<ResourceTopic> resourceTopics = createResourceTopics(resource, form.getTopicIds());
         resource.setResourceTopics(resourceTopics);
+
         resourceDAO.save(resource);
 
         return resource;
