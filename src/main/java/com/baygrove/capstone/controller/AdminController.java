@@ -69,13 +69,13 @@ public class AdminController {
     public ModelAndView submitNewResource(@Valid ResourceFormBean form, BindingResult bindingResult) {
         ModelAndView response = new ModelAndView();
 
-        if (form.getImageFile().isEmpty()) {
-            bindingResult.rejectValue("imageFile", "imageFile", "Resource image is required.");
-        }
-
         log.info("submit-new-resource form: " + form);
 
-        if (bindingResult.hasErrors()) {
+        if (form.getImageFile().isEmpty() || bindingResult.hasErrors()) {
+            if (form.getImageFile().isEmpty()) {
+                bindingResult.rejectValue("imageFile", "imageFile", "Resource image is required.");
+            }
+
             for (ObjectError error : bindingResult.getAllErrors()) {
                 log.info("Validation error : " + ((FieldError) error).getField() + " = " + error.getDefaultMessage());
             }
