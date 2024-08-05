@@ -3,7 +3,7 @@
 <div>
     <img
             class="resource-img"
-            src="/assets/img/resources/FreeCodeCamp.webp"
+            src="${resource.imageUrl}"
             class="rounded-start"
             alt="..."
     />
