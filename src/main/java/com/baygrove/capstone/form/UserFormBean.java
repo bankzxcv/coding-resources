@@ -1,7 +1,7 @@
 package com.baygrove.capstone.form;
 
-import com.baygrove.capstone.validation.UserEmailUnique;
-import com.baygrove.capstone.validation.UserUserNameUnique;
+import com.baygrove.capstone.validation.user.UserEmailUnique;
+import com.baygrove.capstone.validation.user.UserUserNameUnique;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;

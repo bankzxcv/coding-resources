@@ -1,5 +1,4 @@
-package com.baygrove.capstone.validation;
-
+package com.baygrove.capstone.validation.user;
 
 import com.baygrove.capstone.database.dao.UserDAO;
 import com.baygrove.capstone.database.entity.User;
@@ -8,20 +7,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.*;
 import org.springframework.util.*;
 
-
 @Slf4j
-public class UserEmailUniqueImpl implements ConstraintValidator<UserEmailUnique, String> {
+public class UserUserNameUniqueImpl implements ConstraintValidator<UserUserNameUnique, String> {
 
     @Autowired
     private UserDAO userDAO;
 
     @Override
-    public boolean isValid(String value, ConstraintValidatorContext context) {
-        if (StringUtils.isEmpty(value)) {
+    public boolean isValid(String username, ConstraintValidatorContext context) {
+        if (StringUtils.isEmpty(username)) {
             return true;
         }
 
-        User user = userDAO.findByEmailIgnoreCase(value);
+        User user = userDAO.findByUsernameIgnoreCase(username);
 
         return (user == null);
     }

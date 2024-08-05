@@ -1,4 +1,5 @@
-package com.baygrove.capstone.validation;
+package com.baygrove.capstone.validation.user;
+
 
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
@@ -6,11 +7,11 @@ import jakarta.validation.Payload;
 import java.lang.annotation.*;
 
 @Documented
-@Constraint(validatedBy = UserEmailUniqueImpl.class)
+@Constraint(validatedBy = UserUserNameUniqueImpl.class)
 @Target({ElementType.FIELD})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface UserEmailUnique {
-    String message() default "{UserEmailUnique}";
+public @interface UserUserNameUnique {
+    String message() default "{UserUsernameUnique}";
 
     Class<?>[] groups() default {};
 
