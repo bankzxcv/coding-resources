@@ -31,7 +31,12 @@
         </tr>
         <tr>
             <th>Categories</th>
-            <td>Web Development, Data Science, Interview Preparation</td>
+
+            <td>
+                <c:forEach items="${resource.resourceCategories}" var="resourceCategory">
+                    ${resourceCategory.category.name},
+                </c:forEach>
+            </td>
         </tr>
         <tr>
             <th>Topics</th>
