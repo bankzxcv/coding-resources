@@ -10,6 +10,10 @@ import java.util.List;
 public interface ResourceDAO extends JpaRepository<Resource, Long> {
     Resource findById(Integer id);
 
+    Resource findByName(String name);
+
+    Resource findByUrl(String url);
+
     @Nonnull
     List<Resource> findAll();
 
