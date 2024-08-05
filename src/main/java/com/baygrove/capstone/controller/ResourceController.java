@@ -11,7 +11,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -28,14 +27,30 @@ public class ResourceController {
     private TopicDAO topicDAO;
 
     @GetMapping("/topics/{id}")
-    public ModelAndView resourcesByTopic (@PathVariable(name = "id") Integer topicId) {
+    public ModelAndView resourcesByTopic(@PathVariable(name = "id") Integer topicId) {
         ModelAndView response = new ModelAndView("resource/resources-by-topic");
-        
+
         List<Resource> resources = resourceDAO.findByTopicId(topicId);
         Topic topic = topicDAO.findById(topicId);
 
         response.addObject("resources", resources);
         response.addObject("topicName", topic.getName());
+
+        return response;
+    }
+
+
+    @GetMapping("/detail/{id}")
+    public ModelAndView resourceDetail(@PathVariable(name = "id") Integer resourceId) {
+        ModelAndView response = new ModelAndView("resource/resource-detail");
+
+        log.info("resourceId: " + resourceId);
+
+        // get resource by resource Id
+
+        Resource resource = resourceDAO.findById(resourceId);
+
+        response.addObject("resource", resource);
 
         return response;
     }
