@@ -26,6 +26,7 @@ public class ResourceController {
     @Autowired
     private TopicDAO topicDAO;
 
+
     @GetMapping("/topics/{id}")
     public ModelAndView resourcesByTopic(@PathVariable(name = "id") Integer topicId) {
         ModelAndView response = new ModelAndView("resource/resources-by-topic");
@@ -46,10 +47,7 @@ public class ResourceController {
 
         log.info("resourceId: " + resourceId);
 
-        // get resource by resource Id
-
         Resource resource = resourceDAO.findById(resourceId);
-
         response.addObject("resource", resource);
 
         return response;
