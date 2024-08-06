@@ -2,8 +2,10 @@ package com.baygrove.capstone.service;
 
 
 import com.baygrove.capstone.database.dao.UserDAO;
+import com.baygrove.capstone.database.dao.UserListDAO;
 import com.baygrove.capstone.database.dao.UserRoleDAO;
 import com.baygrove.capstone.database.entity.User;
+import com.baygrove.capstone.database.entity.UserList;
 import com.baygrove.capstone.database.entity.UserRole;
 import com.baygrove.capstone.form.UserFormBean;
 import lombok.extern.slf4j.Slf4j;
@@ -24,6 +26,9 @@ public class UserService {
 
     @Autowired
     private UserRoleDAO userRoleDAO;
+
+    @Autowired
+    UserListDAO userListDAO;
 
     public UserRole createUserRole(Integer userId, String roleName) {
         UserRole userRole = new UserRole();
@@ -47,6 +52,13 @@ public class UserService {
 
         user.setCreatedAt(new Date());
         userDAO.save(user);
+
+        // create default user list
+        UserList userList = new UserList();
+        userList.setName("My List");
+        userList.setUser(user);
+        
+        userListDAO.save(userList);
 
         return user;
     }
