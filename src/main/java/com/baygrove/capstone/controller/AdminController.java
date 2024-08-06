@@ -25,6 +25,7 @@ import java.util.List;
 
 @Slf4j
 @Controller
+@PreAuthorize("hasAuthority('ADMIN')")
 @RequestMapping("/admin")
 public class AdminController {
     @Autowired
@@ -45,7 +46,6 @@ public class AdminController {
         response.addObject("topics", topics);
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("/dashboard")
     public ModelAndView adminDashboard() {
         ModelAndView response = new ModelAndView("admin/dashboard");
@@ -56,7 +56,6 @@ public class AdminController {
         return response;
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("add-new-resource")
     public ModelAndView addNewResource() {
         ModelAndView response = new ModelAndView("admin/resource-form");
@@ -64,7 +63,6 @@ public class AdminController {
         return response;
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping("/submit-new-resource")
     public ModelAndView submitNewResource(@Valid ResourceFormBean form, BindingResult bindingResult) {
         ModelAndView response = new ModelAndView();
