@@ -8,12 +8,14 @@ import com.baygrove.capstone.database.entity.User;
 import com.baygrove.capstone.database.entity.UserList;
 import com.baygrove.capstone.database.entity.UserRole;
 import com.baygrove.capstone.form.UserFormBean;
+import com.baygrove.capstone.security.AuthenticatedUserUtilities;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -29,6 +31,10 @@ public class UserService {
 
     @Autowired
     UserListDAO userListDAO;
+
+    @Autowired
+    AuthenticatedUserUtilities authenticatedUserUtilities;
+
 
     public UserRole createUserRole(Integer userId, String roleName) {
         UserRole userRole = new UserRole();
@@ -57,9 +63,20 @@ public class UserService {
         UserList userList = new UserList();
         userList.setName("My List");
         userList.setUser(user);
-        
+
         userListDAO.save(userList);
 
         return user;
+    }
+
+    public Integer getCurrentUserDefaultListId() {
+        User user = authenticatedUserUtilities.getCurrentUser();
+
+        if (user == null) {
+            return null;
+        }
+
+        List<UserList> userLists = userListDAO.findByUserId(user.getId());
+        return userLists.get(0).getId();
     }
 }

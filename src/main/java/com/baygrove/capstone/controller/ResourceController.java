@@ -5,6 +5,7 @@ import com.baygrove.capstone.database.dao.ResourceDAO;
 import com.baygrove.capstone.database.dao.TopicDAO;
 import com.baygrove.capstone.database.entity.Resource;
 import com.baygrove.capstone.database.entity.Topic;
+import com.baygrove.capstone.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,9 @@ public class ResourceController {
     @Autowired
     private TopicDAO topicDAO;
 
+    @Autowired
+    private UserService userService;
+
 
     @GetMapping("/topics/{id}")
     public ModelAndView resourcesByTopic(@PathVariable(name = "id") Integer topicId) {
@@ -36,6 +40,8 @@ public class ResourceController {
 
         response.addObject("resources", resources);
         response.addObject("topicName", topic.getName());
+        response.addObject("userListId", userService.getCurrentUserDefaultListId());
+
 
         return response;
     }
@@ -49,6 +55,8 @@ public class ResourceController {
 
         Resource resource = resourceDAO.findById(resourceId);
         response.addObject("resource", resource);
+        response.addObject("userListId", userService.getCurrentUserDefaultListId());
+
 
         return response;
     }
