@@ -1,28 +1,30 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<div
-        role="link"
-        target="_blank"
-        onclick=" window.open('/resources/detail/${resource.id}', '_blank').focus();"
-        class="card my-2"
->
+<div class="card my-2">
     <div class="row g-0">
-        <div
-                class="col-md-4 d-flex justify-content-center align-items-center"
-        >
-            <img
-                    class="resource-img"
-                    src="${requestScope.resource.imageUrl}"
-                    class="rounded-start"
-                    alt="..."
-            />
-        </div>
+        <div class="col-md-4 d-flex justify-content-center align-items-center">
+            <a
+                    href="/resources/detail/${resource.id}"
+                    target="_blank"
+            >
 
+                <img
+                        class="resource-img"
+                        src="${requestScope.resource.imageUrl}"
+                        class="rounded-start"
+                        alt="..."
+                />
+            </a>
+        </div>
         <div class="col-md-8">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2 class="card-title">${requestScope.resource.name}</h2>
-                    <a href="#" class="btn btn-primary">+ ADD TO LIST</a>
+                    <a href="/resources/detail/${resource.id}" target="_blank">
+                        <h2 class="card-title">${requestScope.resource.name}</h2>
+                    </a>
+                    
+                    <a href="/user-list/add-resource?userListId=${userListId}&resourceId=${resource.id}"
+                       class="btn btn-primary">+ ADD TO LIST</a>
                 </div>
                 <p class="card-text">
                     ${requestScope.resource.description}
@@ -32,16 +34,12 @@
                             href="${requestScope.resource.url}"
                             target="_blank"
                             class="btn btn-secondary"
-                            onclick="event.stopPropagation();"
-                    >START LEARNING</a
-                    >
+                    >START LEARNING</a>
                     <a
                             href="/resources/detail/${resource.id}"
                             target="_blank"
                             class="btn btn-outline-secondary"
-                            onclick="event.stopPropagation();"
-                    >MORE INFO</a
-                    >
+                    >MORE INFO</a>
                 </div>
 
                 <p class="card-text mt-3 gap-1 d-flex justify-content-end">
