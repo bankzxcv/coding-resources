@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../include/header.jsp"/>
 
-<form id="sign-up-form" action="/user/signup" method="post" class="border p-4 rounded-2">
+<form id="sign-up-form" action="/auth/signup" method="post" class="border p-4 rounded-2">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <div class="mb-3">
         <label for="emailId" class="form-label">Email</label>

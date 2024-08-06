@@ -35,13 +35,13 @@ public class SpringSecurity {
                 .anyRequest().permitAll();
 
         http.formLogin(formLogin -> formLogin
-                .loginPage("/user/login") // GET
-                .loginProcessingUrl("/user/login-process") // POST
+                .loginPage("/auth/login") // GET
+                .loginProcessingUrl("/auth/login-process") // POST
         );
 
         http.logout(formLogout -> formLogout
                 .invalidateHttpSession(true)
-                .logoutUrl("/user/logout")
+                .logoutUrl("/auth/logout")
                 .logoutSuccessUrl("/"));
 
         return http.build();

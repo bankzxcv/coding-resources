@@ -106,10 +106,10 @@
                 </li>
                 <sec:authorize access="!isAuthenticated()">
                     <li class="nav-item">
-                        <a class="nav-link px-3 btn btn-primary text-white" href="/user/login">Log In</a>
+                        <a class="nav-link px-3 btn btn-primary text-white" href="/auth/login">Log In</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link px-3 btn btn-outline-secondary mx-2" href="/user/signup">Sign Up</a>
+                        <a class="nav-link px-3 btn btn-outline-secondary mx-2" href="/auth/signup">Sign Up</a>
                     </li>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
@@ -122,7 +122,7 @@
                     <li class="nav-item flex-row-center-center">
                         <span class="nav-link fs-6"><sec:authentication property="name"/></span>
                     </li>
-                    <form class="flex-row-center-center" action="/user/logout" method="post">
+                    <form class="flex-row-center-center" action="/auth/logout" method="post">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                         <input class="nav-item px-3 btn btn-outline-secondary" type="submit" value="Log Out"/>
                     </form>

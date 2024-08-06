@@ -36,7 +36,7 @@ public class UserListController {
         ModelAndView response = new ModelAndView("index");
 
         if (userListId == null) {
-            response.setViewName("redirect:/user/login");
+            response.setViewName("redirect:/auth/login");
             return response;
         }
 

@@ -21,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
 @Controller
-@RequestMapping("/user")
+@RequestMapping("/auth")
 public class UserController {
 
     @Autowired
@@ -36,7 +36,7 @@ public class UserController {
 
     @GetMapping("signup")
     public ModelAndView createAccount() {
-        ModelAndView response = new ModelAndView("user/sign-up-form");
+        ModelAndView response = new ModelAndView("auth/sign-up-form");
 
         return response;
     }
@@ -44,7 +44,7 @@ public class UserController {
     @PostMapping("signup")
     public ModelAndView createAccountSubmit(@Valid UserFormBean form, BindingResult bindingResult, HttpSession session) {
 
-        ModelAndView response = new ModelAndView("user/sign-up-form");
+        ModelAndView response = new ModelAndView("auth/sign-up-form");
         log.info("submit form: " + form.toString());
 
         if (bindingResult.hasErrors()) {
@@ -73,7 +73,7 @@ public class UserController {
 
     @GetMapping("login")
     public ModelAndView getLogin() {
-        ModelAndView response = new ModelAndView("user/log-in-form");
+        ModelAndView response = new ModelAndView("auth/log-in-form");
 
         return response;
     }
