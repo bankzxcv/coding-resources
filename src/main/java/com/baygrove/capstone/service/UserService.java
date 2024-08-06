@@ -77,6 +77,16 @@ public class UserService {
         }
 
         List<UserList> userLists = userListDAO.findByUserId(user.getId());
+
+        if (userLists.size() == 0) {
+            UserList userList = new UserList();
+            userList.setName("My List");
+            userList.setUser(user);
+
+            userListDAO.save(userList);
+            return userList.getId();
+        }
+
         return userLists.get(0).getId();
     }
 }
