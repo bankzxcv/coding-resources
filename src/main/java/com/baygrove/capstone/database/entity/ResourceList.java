@@ -16,9 +16,19 @@ public class ResourceList {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "list_id")
+    @Column(name = "list_id", insertable = false, updatable = false)
     private Integer listId;
 
-    @Column(name = "resource_id")
+    @Column(name = "resource_id", insertable = false, updatable = false)
     private Integer resourceId;
+
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "resource_id", nullable = false)
+    private Resource resource;
+
+    @ToString.Exclude
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "list_id", nullable = false)
+    private UserList userList;
 }
