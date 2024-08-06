@@ -4,6 +4,8 @@ package com.baygrove.capstone.database.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Setter
 @Getter
 @Entity
@@ -18,7 +20,7 @@ public class UserList {
     private Integer id;
 
     @Column(name = "user_id", insertable = false, updatable = false)
-    private String userId;
+    private Integer userId;
 
     @Column(name = "name")
     private String name;
@@ -27,4 +29,5 @@ public class UserList {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
 }
