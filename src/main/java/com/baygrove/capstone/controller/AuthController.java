@@ -22,7 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 @Slf4j
 @Controller
 @RequestMapping("/auth")
-public class UserController {
+public class AuthController {
 
     @Autowired
     private UserDAO userDAO;
