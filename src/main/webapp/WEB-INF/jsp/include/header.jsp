@@ -102,7 +102,7 @@
                     </ul>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">All Resources</a>
+                    <a class="nav-link" href="/user-list/all">My Resources</a>
                 </li>
                 <sec:authorize access="!isAuthenticated()">
                     <li class="nav-item">
