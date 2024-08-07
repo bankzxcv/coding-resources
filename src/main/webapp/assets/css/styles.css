@@ -76,12 +76,12 @@ a {
 }
 
 .resource-img {
-    object-fit: contain;
     width: 100%;
 }
 
 .card {
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    max-height: 290px;
 }
 
 .resource-img:hover {
