@@ -1,4 +1,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
+
 <jsp:include page="../include/header.jsp"/>
 <div>
     <img
@@ -31,18 +33,21 @@
         </tr>
         <tr>
             <th>Categories</th>
-
             <td>
+                <c:set var="count" value="1" scope="page"/>
                 <c:forEach items="${resource.resourceCategories}" var="resourceCategory">
-                    ${resourceCategory.category.name},
+                    ${resourceCategory.category.name}<c:if test="${count < resource.resourceCategories.size()}">,</c:if>
+                    <c:set var="count" scope="page" value="${count + 1}"/>
                 </c:forEach>
             </td>
         </tr>
         <tr>
             <th>Topics</th>
             <td>
+                <c:set var="count" value="1" scope="page"/>
                 <c:forEach items="${resource.resourceTopics}" var="resourceTopics">
-                    ${resourceTopics.topic.name},
+                    ${resourceTopics.topic.name}<c:if test="${count < resource.resourceTopics.size()}">,</c:if>
+                    <c:set var="count" scope="page" value="${count + 1}"/>
                 </c:forEach>
             </td>
         </tr>
