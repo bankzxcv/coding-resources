@@ -22,10 +22,18 @@
                     <a href="/resources/detail/${resource.id}" target="_blank">
                         <h2 class="card-title">${requestScope.resource.name}</h2>
                     </a>
-                    
-                    <a href="/user-list/add-resource?userListId=${userListId}&resourceId=${resource.id}"
-                       class="btn btn-primary">+ ADD TO LIST</a>
+                    <c:choose>
+                        <c:when test="${resource.added}">
+                            <a href="#"
+                               class="btn btn-danger">- REMOVE FROM LIST</a>
+                        </c:when>
+                        <c:otherwise>
+                            <a href="/user-list/add-resource?userListId=${userListId}&resourceId=${resource.id}"
+                               class="btn btn-primary">+ ADD TO LIST</a>
+                        </c:otherwise>
+                    </c:choose>
                 </div>
+
                 <p class="card-text">
                     ${requestScope.resource.description}
                 </p>
