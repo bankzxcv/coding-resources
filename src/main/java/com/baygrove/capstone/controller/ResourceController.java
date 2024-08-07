@@ -5,6 +5,8 @@ import com.baygrove.capstone.database.dao.ResourceDAO;
 import com.baygrove.capstone.database.dao.TopicDAO;
 import com.baygrove.capstone.database.entity.Resource;
 import com.baygrove.capstone.database.entity.Topic;
+import com.baygrove.capstone.dto.ResourceDTO;
+import com.baygrove.capstone.service.ResourceService;
 import com.baygrove.capstone.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -30,6 +33,8 @@ public class ResourceController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private ResourceService resourceService;
 
     @GetMapping("/topics/{id}")
     public ModelAndView resourcesByTopic(@PathVariable(name = "id") Integer topicId) {
@@ -38,7 +43,14 @@ public class ResourceController {
         List<Resource> resources = resourceDAO.findByTopicId(topicId);
         Topic topic = topicDAO.findById(topicId);
 
-        response.addObject("resources", resources);
+        List<ResourceDTO> resourceDTOs = new ArrayList<>();
+
+        for (Resource resource : resources) {
+            ResourceDTO resourceDTO = resourceService.convertResourceToResourceDTO(resource, false);
+            resourceDTOs.add(resourceDTO);
+        }
+
+        response.addObject("resources", resourceDTOs);
         response.addObject("topicName", topic.getName());
         response.addObject("userListId", userService.getCurrentUserDefaultListId());
 
@@ -54,6 +66,8 @@ public class ResourceController {
         log.info("resourceId: " + resourceId);
 
         Resource resource = resourceDAO.findById(resourceId);
+
+
         response.addObject("resource", resource);
         response.addObject("userListId", userService.getCurrentUserDefaultListId());
 
