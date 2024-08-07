@@ -38,6 +38,8 @@ a {
 
 .btn-outline-primary:hover {
     border-color: #0e9a6c;
+    background-color: #0f9e6f;
+    
 }
 
 .btn-secondary {
@@ -77,6 +79,7 @@ a {
 
 .resource-img {
     width: 100%;
+    height: inherit;
 }
 
 .card {
