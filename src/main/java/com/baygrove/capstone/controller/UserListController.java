@@ -65,13 +65,39 @@ public class UserListController {
         }
 
         UserList userList = userListDAO.findById(userListId);
-        Resource resource = resourceDAO.findById(resourceId);
+        Resource resourceToAdd = resourceDAO.findById(resourceId);
 
         ResourceList resourceList = new ResourceList();
         resourceList.setUserList(userList);
-        resourceList.setResource(resource);
+        resourceList.setResource(resourceToAdd);
 
         resourceListDAO.save(resourceList);
+
+        List<Resource> resources = resourceDAO.findAll();
+        List<ResourceDTO> resourceDTOs = new ArrayList<>();
+
+        for (Resource resource : resources) {
+            ResourceDTO resourceDTO = resourceService.convertResourceToResourceDTO(resource, false);
+            resourceDTOs.add(resourceDTO);
+        }
+
+        response.addObject("resources", resourceDTOs);
+        response.addObject("userListId", userListId);
+
+        return response;
+    }
+
+    @GetMapping("/remove-resource")
+    public ModelAndView removeResourceFromUserList(@RequestParam Integer resourceId, @RequestParam Integer userListId) {
+        ModelAndView response = new ModelAndView("index");
+
+        ResourceList resourceList = resourceListDAO.findByListIdAndResourceId(userListId, resourceId);
+        resourceListDAO.delete(resourceList);
+
+        List<ResourceList> resourceLists = resourceListDAO.findByListId(userListId);
+
+        response.addObject("userListId", userListId);
+        response.addObject("resources", convertResourceListsToResourceDTOs(resourceLists));
 
         return response;
     }

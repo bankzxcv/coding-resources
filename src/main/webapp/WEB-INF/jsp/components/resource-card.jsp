@@ -24,7 +24,7 @@
                     </a>
                     <c:choose>
                         <c:when test="${resource.added}">
-                            <a href="#"
+                            <a href="/user-list/remove-resource?userListId=${userListId}&resourceId=${resource.id}"
                                class="btn btn-danger">REMOVE FROM LIST</a>
                         </c:when>
                         <c:otherwise>
