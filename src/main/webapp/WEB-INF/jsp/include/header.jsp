@@ -53,28 +53,28 @@
                     >Home</a
                     >
                 </li>
-                <li class="nav-item dropdown">
-                    <a
-                            class="nav-link dropdown-toggle"
-                            href="#"
-                            role="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
-                    >
-                        Categories
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Computer Science</a></li>
-                        <li><a class="dropdown-item" href="#">Web Development</a></li>
-                        <li><a class="dropdown-item" href="#">Data Science</a></li>
-                        <li><a class="dropdown-item" href="#">Databases</a></li>
-                        <li><a class="dropdown-item" href="#">CI/DC</a></li>
-                        <li><a class="dropdown-item" href="#">Cloud Computing</a></li>
-                        <li>
-                            <a class="dropdown-item" href="#">Interview Preps</a>
-                        </li>
-                    </ul>
-                </li>
+                <%--                <li class="nav-item dropdown">--%>
+                <%--                    <a--%>
+                <%--                            class="nav-link dropdown-toggle"--%>
+                <%--                            href="#"--%>
+                <%--                            role="button"--%>
+                <%--                            data-bs-toggle="dropdown"--%>
+                <%--                            aria-expanded="false"--%>
+                <%--                    >--%>
+                <%--                        Categories--%>
+                <%--                    </a>--%>
+                <%--                    <ul class="dropdown-menu">--%>
+                <%--                        <li><a class="dropdown-item" href="#">Computer Science</a></li>--%>
+                <%--                        <li><a class="dropdown-item" href="#">Web Development</a></li>--%>
+                <%--                        <li><a class="dropdown-item" href="#">Data Science</a></li>--%>
+                <%--                        <li><a class="dropdown-item" href="#">Databases</a></li>--%>
+                <%--                        <li><a class="dropdown-item" href="#">CI/DC</a></li>--%>
+                <%--                        <li><a class="dropdown-item" href="#">Cloud Computing</a></li>--%>
+                <%--                        <li>--%>
+                <%--                            <a class="dropdown-item" href="#">Interview Preps</a>--%>
+                <%--                        </li>--%>
+                <%--                    </ul>--%>
+                <%--                </li>--%>
                 <li class="nav-item dropdown">
                     <a
                             class="nav-link dropdown-toggle"
@@ -101,9 +101,6 @@
                         </li>
                     </ul>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/user-list/all">My Resources</a>
-                </li>
                 <sec:authorize access="!isAuthenticated()">
                     <li class="nav-item">
                         <a class="nav-link px-3 btn btn-primary text-white" href="/auth/login">Log In</a>
@@ -113,6 +110,9 @@
                     </li>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user-list/all">My Resources</a>
+                    </li>
                     <sec:authorize access="hasAuthority('ADMIN')">
                         <li class="nav-item mx-2">
                             <a class="nav-link px-3 text-center btn btn-primary"
