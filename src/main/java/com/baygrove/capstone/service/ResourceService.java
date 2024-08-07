@@ -6,6 +6,7 @@ import com.baygrove.capstone.database.dao.TopicDAO;
 import com.baygrove.capstone.database.entity.Resource;
 import com.baygrove.capstone.database.entity.ResourceTopic;
 import com.baygrove.capstone.database.entity.Topic;
+import com.baygrove.capstone.dto.ResourceDTO;
 import com.baygrove.capstone.form.ResourceFormBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +62,24 @@ public class ResourceService {
         }
 
         return resourceTopics;
+    }
+
+    public ResourceDTO convertResourceToResourceDTO(Resource resource, Boolean isAdded) {
+        ResourceDTO resourceDTO = new ResourceDTO();
+        resourceDTO.setAdded(isAdded);
+        resourceDTO.setId(resource.getId());
+        resourceDTO.setName(resource.getName());
+        resourceDTO.setDescription(resource.getDescription());
+        resourceDTO.setUrl(resource.getUrl());
+        resourceDTO.setImageUrl(resource.getImageUrl());
+        resourceDTO.setStatus(resource.getStatus());
+        resourceDTO.setResourceTopics(resource.getResourceTopics());
+        resourceDTO.setResourceLists(resource.getResourceLists());
+        resourceDTO.setResourceCategories(resource.getResourceCategories());
+        resourceDTO.setCreatedAt(resource.getCreatedAt());
+        resourceDTO.setUpdatedAt(resource.getUpdatedAt());
+
+        return resourceDTO;
     }
 
 
