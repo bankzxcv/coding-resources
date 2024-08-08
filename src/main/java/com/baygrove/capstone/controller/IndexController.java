@@ -2,15 +2,14 @@ package com.baygrove.capstone.controller;
 
 import com.baygrove.capstone.database.dao.ResourceDAO;
 import com.baygrove.capstone.database.dao.ResourceListDAO;
+import com.baygrove.capstone.database.dao.TopicDAO;
 import com.baygrove.capstone.database.dao.UserListDAO;
-import com.baygrove.capstone.database.entity.Resource;
-import com.baygrove.capstone.database.entity.ResourceList;
-import com.baygrove.capstone.database.entity.User;
-import com.baygrove.capstone.database.entity.UserList;
+import com.baygrove.capstone.database.entity.*;
 import com.baygrove.capstone.dto.ResourceDTO;
 import com.baygrove.capstone.security.AuthenticatedUserUtilities;
 import com.baygrove.capstone.service.ResourceService;
 import com.baygrove.capstone.service.UserService;
+import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,11 +36,13 @@ public class IndexController {
     @Autowired
     ResourceListDAO resourceListDAO;
 
+    @Autowired
+    private TopicDAO topicDAO;
+
 
     @GetMapping("/")
-    public ModelAndView index() {
+    public ModelAndView index(HttpSession session) {
         ModelAndView response = new ModelAndView("index");
-
 //        List<Map<String, Object>> resources = resourceDAO.findAllWithIsAddedToUserList(userListId);
         // TODO: Fix this? resource's topics relationships are not included
 
@@ -65,6 +66,9 @@ public class IndexController {
 
         response.addObject("resources", resourceDTOs);
         response.addObject("userListId", userListId);
+
+        List<Topic> topics = topicDAO.findAllByOrderByNameAsc();
+        session.setAttribute("topics", topics);
 
         return response;
     }

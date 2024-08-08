@@ -1,4 +1,5 @@
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -86,19 +87,9 @@
                         Topics
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">HTML</a></li>
-                        <li><a class="dropdown-item" href="#">CSS</a></li>
-                        <li><a class="dropdown-item" href="#">JavaScript</a></li>
-                        <li><a class="dropdown-item" href="#">TypeScript</a></li>
-                        <li><a class="dropdown-item" href="#">Python</a></li>
-                        <li><a class="dropdown-item" href="#">Java</a></li>
-                        <li><a class="dropdown-item" href="#">Ruby</a></li>
-                        <li><a class="dropdown-item" href="#">MySQL</a></li>
-                        <li><a class="dropdown-item" href="#">PostgreSQL</a></li>
-                        <li><a class="dropdown-item" href="#">MongoDB</a></li>
-                        <li>
-                            <a class="dropdown-item" href="#">Interview Preps</a>
-                        </li>
+                        <c:forEach items="${sessionScope.topics}" var="topic">
+                            <li><a class="dropdown-item" href="/resources/topics/${topic.id}">${topic.name}</a></li>
+                        </c:forEach>
                     </ul>
                 </li>
                 <sec:authorize access="!isAuthenticated()">
