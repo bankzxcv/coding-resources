@@ -3,6 +3,7 @@ package com.baygrove.capstone.dto;
 import com.baygrove.capstone.database.entity.ResourceCategory;
 import com.baygrove.capstone.database.entity.ResourceList;
 import com.baygrove.capstone.database.entity.ResourceTopic;
+import com.baygrove.capstone.database.enums.ResourceStatus;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -28,11 +29,12 @@ public class ResourceDTO {
 
     private String imageUrl;
 
-    private String status;
+    private ResourceStatus status;
 
     private Date createdAt;
 
     private Date updatedAt;
+
 
     private List<ResourceCategory> resourceCategories;
 

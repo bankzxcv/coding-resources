@@ -1,5 +1,6 @@
 package com.baygrove.capstone.database.entity;
 
+import com.baygrove.capstone.database.enums.ResourceStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -32,7 +33,8 @@ public class Resource {
     private String imageUrl;
 
     @Column(name = "status")
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private ResourceStatus status;
 
     @Column(name = "created_at")
     @Temporal(TemporalType.TIMESTAMP)
