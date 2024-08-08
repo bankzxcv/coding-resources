@@ -1,6 +1,5 @@
 package com.baygrove.capstone.controller;
 
-import com.baygrove.capstone.database.dao.UserDAO;
 import com.baygrove.capstone.database.entity.User;
 import com.baygrove.capstone.form.UserFormBean;
 import com.baygrove.capstone.security.AuthenticatedUserUtilities;
@@ -23,9 +22,6 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 @RequestMapping("/auth")
 public class AuthController {
-
-    @Autowired
-    private UserDAO userDAO;
 
     @Autowired
     private UserService userService;

@@ -7,7 +7,6 @@ import com.baygrove.capstone.database.entity.Resource;
 import com.baygrove.capstone.database.entity.Topic;
 import com.baygrove.capstone.dto.ResourceDTO;
 import com.baygrove.capstone.service.ResourceService;
-import com.baygrove.capstone.service.UserService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -30,9 +28,6 @@ public class ResourceController {
 
     @Autowired
     private TopicDAO topicDAO;
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private ResourceService resourceService;
