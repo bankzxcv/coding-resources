@@ -1,9 +1,11 @@
 package com.baygrove.capstone.service;
 
 import com.baygrove.capstone.database.dao.ResourceDAO;
+import com.baygrove.capstone.database.dao.ResourceListDAO;
 import com.baygrove.capstone.database.dao.ResourceTopicDAO;
 import com.baygrove.capstone.database.dao.TopicDAO;
 import com.baygrove.capstone.database.entity.Resource;
+import com.baygrove.capstone.database.entity.ResourceList;
 import com.baygrove.capstone.database.entity.ResourceTopic;
 import com.baygrove.capstone.database.entity.Topic;
 import com.baygrove.capstone.database.enums.ResourceStatus;
@@ -18,9 +20,7 @@ import org.springframework.beans.BeanUtils;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -34,6 +34,12 @@ public class ResourceService {
 
     @Autowired
     TopicDAO topicDAO;
+
+    @Autowired
+    UserService userService;
+
+    @Autowired
+    ResourceListDAO resourceListDAO;
 
     public String saveResourceImage(MultipartFile imageFile) {
         String saveProfileImageName = "./src/main/webapp/assets/img/resources/" + imageFile.getOriginalFilename();
@@ -84,6 +90,27 @@ public class ResourceService {
 //        resourceDTO.setUpdatedAt(resource.getUpdatedAt());
 
         return resourceDTO;
+    }
+
+    public List<ResourceDTO> convertResourcesToResourceDTOsWithIsAddedProperty(List<Resource> resources) {
+        List<ResourceDTO> resourceDTOs = new ArrayList<>();
+
+        Integer userListId = userService.getCurrentUserDefaultListId();
+        List<ResourceList> resourceLists = resourceListDAO.findByListId(userListId);
+
+        Set<Integer> set = new HashSet<>();
+        for (ResourceList resourceList : resourceLists) {
+            set.add(resourceList.getResourceId());
+        }
+
+        for (Resource resource : resources) {
+            boolean isAdded = set.contains(resource.getId());
+
+            ResourceDTO resourceDTO = convertResourceToResourceDTO(resource, isAdded ? 1 : 0);
+            resourceDTOs.add(resourceDTO);
+        }
+
+        return resourceDTOs;
     }
 
 

@@ -12,6 +12,8 @@ import com.baygrove.capstone.service.UserService;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
+import org.springframework.security.core.session.SessionDestroyedEvent;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -47,28 +49,12 @@ public class IndexController {
         // TODO: Fix this? resource's topics relationships are not included
 
         List<Resource> resources = resourceDAO.findAll();
-        List<ResourceDTO> resourceDTOs = new ArrayList<>();
-
-        Integer userListId = userService.getCurrentUserDefaultListId();
-        List<ResourceList> resourceLists = resourceListDAO.findByListId(userListId);
-
-        Set<Integer> set = new HashSet<>();
-        for (ResourceList resourceList : resourceLists) {
-            set.add(resourceList.getResourceId());
-        }
-
-        for (Resource resource : resources) {
-            boolean isAdded = set.contains(resource.getId());
-
-            ResourceDTO resourceDTO = resourceService.convertResourceToResourceDTO(resource, isAdded ? 1 : 0);
-            resourceDTOs.add(resourceDTO);
-        }
-
+        List<ResourceDTO> resourceDTOs = resourceService.convertResourcesToResourceDTOsWithIsAddedProperty(resources);
         response.addObject("resources", resourceDTOs);
-        response.addObject("userListId", userListId);
 
         List<Topic> topics = topicDAO.findAllByOrderByNameAsc();
         session.setAttribute("topics", topics);
+        session.setAttribute("userListId", userService.getCurrentUserDefaultListId());
 
         return response;
     }
