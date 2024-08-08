@@ -17,10 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 @Slf4j
 @Controller
@@ -45,9 +42,12 @@ public class IndexController {
     public ModelAndView index() {
         ModelAndView response = new ModelAndView("index");
 
+//        List<Map<String, Object>> resources = resourceDAO.findAllWithIsAddedToUserList(userListId);
+        // TODO: Fix this? resource's topics relationships are not included
+
         List<Resource> resources = resourceDAO.findAll();
         List<ResourceDTO> resourceDTOs = new ArrayList<>();
-        
+
         Integer userListId = userService.getCurrentUserDefaultListId();
         List<ResourceList> resourceLists = resourceListDAO.findByListId(userListId);
 
@@ -59,7 +59,7 @@ public class IndexController {
         for (Resource resource : resources) {
             boolean isAdded = set.contains(resource.getId());
 
-            ResourceDTO resourceDTO = resourceService.convertResourceToResourceDTO(resource, isAdded);
+            ResourceDTO resourceDTO = resourceService.convertResourceToResourceDTO(resource, isAdded ? 1 : 0);
             resourceDTOs.add(resourceDTO);
         }
 

@@ -24,7 +24,7 @@
                         <h2 class="card-title">${requestScope.resource.name}</h2>
                     </a>
                     <c:choose>
-                        <c:when test="${resource.added}">
+                        <c:when test="${resource.isAdded == 1}">
                             <a href="/user-list/remove-resource?userListId=${userListId}&resourceId=${resource.id}"
                                class="btn btn-danger">REMOVE FROM LIST</a>
                         </c:when>

@@ -17,7 +17,7 @@ import java.util.List;
 @ToString
 @NoArgsConstructor
 public class ResourceDTO {
-    private boolean isAdded = false;
+    private Integer isAdded;
 
     private Integer id;
 

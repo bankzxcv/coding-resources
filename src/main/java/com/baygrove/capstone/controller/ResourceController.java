@@ -46,7 +46,7 @@ public class ResourceController {
         List<ResourceDTO> resourceDTOs = new ArrayList<>();
 
         for (Resource resource : resources) {
-            ResourceDTO resourceDTO = resourceService.convertResourceToResourceDTO(resource, false);
+            ResourceDTO resourceDTO = resourceService.convertResourceToResourceDTO(resource, 0);
             resourceDTOs.add(resourceDTO);
         }
 
@@ -67,10 +67,8 @@ public class ResourceController {
 
         Resource resource = resourceDAO.findById(resourceId);
 
-
         response.addObject("resource", resource);
         response.addObject("userListId", userService.getCurrentUserDefaultListId());
-
 
         return response;
     }

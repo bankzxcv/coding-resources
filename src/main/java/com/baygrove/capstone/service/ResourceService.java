@@ -66,9 +66,9 @@ public class ResourceService {
         return resourceTopics;
     }
 
-    public ResourceDTO convertResourceToResourceDTO(Resource resource, Boolean isAdded) {
+    public ResourceDTO convertResourceToResourceDTO(Resource resource, Integer isAdded) {
         ResourceDTO resourceDTO = new ResourceDTO();
-        resourceDTO.setAdded(isAdded);
+        resourceDTO.setIsAdded(isAdded);
 
         BeanUtils.copyProperties(resource, resourceDTO);
 //        resourceDTO.setId(resource.getId());
