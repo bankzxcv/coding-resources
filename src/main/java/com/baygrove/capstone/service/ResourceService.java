@@ -6,12 +6,14 @@ import com.baygrove.capstone.database.dao.TopicDAO;
 import com.baygrove.capstone.database.entity.Resource;
 import com.baygrove.capstone.database.entity.ResourceTopic;
 import com.baygrove.capstone.database.entity.Topic;
+import com.baygrove.capstone.database.enums.ResourceStatus;
 import com.baygrove.capstone.dto.ResourceDTO;
 import com.baygrove.capstone.form.ResourceFormBean;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.beans.BeanUtils;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -67,17 +69,19 @@ public class ResourceService {
     public ResourceDTO convertResourceToResourceDTO(Resource resource, Boolean isAdded) {
         ResourceDTO resourceDTO = new ResourceDTO();
         resourceDTO.setAdded(isAdded);
-        resourceDTO.setId(resource.getId());
-        resourceDTO.setName(resource.getName());
-        resourceDTO.setDescription(resource.getDescription());
-        resourceDTO.setUrl(resource.getUrl());
-        resourceDTO.setImageUrl(resource.getImageUrl());
-        resourceDTO.setStatus(resource.getStatus());
-        resourceDTO.setResourceTopics(resource.getResourceTopics());
-        resourceDTO.setResourceLists(resource.getResourceLists());
-        resourceDTO.setResourceCategories(resource.getResourceCategories());
-        resourceDTO.setCreatedAt(resource.getCreatedAt());
-        resourceDTO.setUpdatedAt(resource.getUpdatedAt());
+
+        BeanUtils.copyProperties(resource, resourceDTO);
+//        resourceDTO.setId(resource.getId());
+//        resourceDTO.setName(resource.getName());
+//        resourceDTO.setDescription(resource.getDescription());
+//        resourceDTO.setUrl(resource.getUrl());
+//        resourceDTO.setImageUrl(resource.getImageUrl());
+//        resourceDTO.setStatus(resource.getStatus());
+//        resourceDTO.setResourceTopics(resource.getResourceTopics());
+//        resourceDTO.setResourceLists(resource.getResourceLists());
+//        resourceDTO.setResourceCategories(resource.getResourceCategories());
+//        resourceDTO.setCreatedAt(resource.getCreatedAt());
+//        resourceDTO.setUpdatedAt(resource.getUpdatedAt());
 
         return resourceDTO;
     }
@@ -91,7 +95,7 @@ public class ResourceService {
         resource.setUrl(form.getUrl());
         resource.setCreatedAt(new Date());
         resource.setUpdatedAt(new Date());
-        resource.setStatus("Pending"); // TODO: use Enum
+        resource.setStatus(ResourceStatus.Pending);
 
         String imageUrl = saveResourceImage(form.getImageFile());
         resource.setImageUrl(imageUrl);
