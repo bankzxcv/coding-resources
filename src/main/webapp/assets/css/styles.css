@@ -39,7 +39,7 @@ a {
 .btn-outline-primary:hover {
     border-color: #0e9a6c;
     background-color: #0f9e6f;
-    
+
 }
 
 .btn-secondary {
@@ -78,13 +78,19 @@ a {
 }
 
 .resource-img {
+    object-fit: scale-down;
     width: 100%;
-    height: inherit;
+    max-height: 250px;
+    padding: 16px 0 16px 16px;
 }
 
 .card {
+    width: 100%;
     box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-    max-height: 290px;
+}
+
+.card-description {
+    max-height: 250px;
 }
 
 .resource-img:hover {

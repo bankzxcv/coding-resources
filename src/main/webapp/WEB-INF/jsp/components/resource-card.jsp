@@ -6,6 +6,7 @@
             <a
                     href="/resources/detail/${resource.id}"
                     target="_blank"
+                    class="card-image-link"
             >
 
                 <img
@@ -34,7 +35,7 @@
                     </c:choose>
                 </div>
 
-                <p class="card-text">
+                <p class="card-text card-description">
                     ${requestScope.resource.description}
                 </p>
                 <div class="card-text gap-1 d-flex justify-content-end">
