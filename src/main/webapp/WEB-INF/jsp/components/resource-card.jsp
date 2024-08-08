@@ -24,11 +24,10 @@
                         <h2 class="card-title">${requestScope.resource.name}</h2>
                     </a>
                     <c:if test="${isAdmin == true}">
-                        <a href="/resources/edit&resourceId=${resource.id}"
+                        <a href="/resources/edit?resourceId=${resource.id}"
                            class="btn btn-primary">EDIT</a>
                     </c:if>
                     <c:if test="${isAdmin != true}">
-                        <div class="alert alert-info d-inline w-40 mt-3" role="alert">Search: "${searchTerm}"</div>
                         <c:choose>
                             <c:when test="${resource.isAdded == 1}">
                                 <a href="/user-list/remove-resource?userListId=${sessionScope.userListId}&resourceId=${resource.id}"
