@@ -6,6 +6,7 @@ import com.baygrove.capstone.database.dao.TopicDAO;
 import com.baygrove.capstone.database.entity.Resource;
 import com.baygrove.capstone.database.entity.ResourceTopic;
 import com.baygrove.capstone.database.entity.Topic;
+import com.baygrove.capstone.database.enums.ResourceStatus;
 import com.baygrove.capstone.dto.ResourceDTO;
 import com.baygrove.capstone.form.ResourceFormBean;
 import com.baygrove.capstone.service.ResourceService;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -98,7 +100,10 @@ public class ResourceController {
 
         List<Topic> topics = topicDAO.findAllByOrderByNameAsc();
         response.addObject("topics", topics);
-
+        List<ResourceStatus> statuses = new ArrayList<>();
+        statuses.add(ResourceStatus.Pending);
+        statuses.add(ResourceStatus.Active);
+        response.addObject("statuses", statuses);
         return response;
     }
 }

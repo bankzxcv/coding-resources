@@ -9,7 +9,6 @@
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     <input type="hidden" name="id" value="${form.id}"/>
     <input type="hidden" name="imageUrl" value="${form.imageUrl}"/>
-    <input type="hidden" name="status" value="${form.status}"/>
     <input type="hidden" name="createdAt" value="${form.createdAt}"/>
 
     <h1 class="text-center mb-4">Resource</h1>
@@ -54,6 +53,23 @@
         >
         <c:if test="${bindingResult.hasFieldErrors('imageFile')}">
             <c:forEach items="${bindingResult.getFieldErrors('imageFile')}" var="error">
+                <div class="text-danger">${error.defaultMessage}</div>
+            </c:forEach>
+        </c:if>
+    </div>
+    <div>
+        <label for="status" class="col-form-label">Status</label>
+        <select id="status" name="status"
+                class="form-control <c:if test="${bindingResult.hasFieldErrors('status')}">is-invalid</c:if>">
+            <option value="0">- Select Status -</option>
+            <c:forEach items="${statuses}" var="status">
+                <option value="${status}"
+                        <c:if test="${status == form.status}">selected</c:if>
+                >${status}</option>
+            </c:forEach>
+        </select>
+        <c:if test="${bindingResult.hasFieldErrors('status')}">
+            <c:forEach items="${bindingResult.getFieldErrors('status')}" var="error">
                 <div class="text-danger">${error.defaultMessage}</div>
             </c:forEach>
         </c:if>
