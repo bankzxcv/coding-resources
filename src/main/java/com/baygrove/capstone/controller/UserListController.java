@@ -37,18 +37,6 @@ public class UserListController {
     @Autowired
     private ResourceService resourceService;
 
-    public List<ResourceDTO> convertResourceListsToResourceDTOs(List<ResourceList> resourceLists) {
-        List<ResourceDTO> resourceDTOs = new ArrayList<>();
-
-        for (ResourceList resourceList : resourceLists) {
-            Resource resource = resourceDAO.findById(resourceList.getResourceId());
-            ResourceDTO resourceDTO = resourceService.convertResourceToResourceDTO(resource, 1);
-            resourceDTOs.add(resourceDTO);
-        }
-
-        return resourceDTOs;
-    }
-
     @GetMapping("/add-resource")
     public ModelAndView addResourceToUserList(@RequestParam Integer resourceId, @RequestParam(required = false) Integer userListId) {
         ModelAndView response = new ModelAndView();
@@ -90,9 +78,11 @@ public class UserListController {
         Integer userListId = userService.getCurrentUserDefaultListId();
         List<ResourceList> resourceLists = resourceListDAO.findByListId(userListId);
 
+        List<Integer> resourceIds = resourceLists.stream().map(resourceList -> resourceList.getResourceId()).toList();
+        List<Resource> resources = resourceDAO.findByIds(resourceIds);
 
-        response.addObject("userListId", userListId);
-        response.addObject("resources", convertResourceListsToResourceDTOs(resourceLists));
+        List<ResourceDTO> resourceDTOs = resourceService.convertResourcesToResourceDTOsWithIsAddedProperty(resources);
+        response.addObject("resources", resourceDTOs);
 
         return response;
     }

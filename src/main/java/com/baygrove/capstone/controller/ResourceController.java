@@ -43,14 +43,9 @@ public class ResourceController {
         List<Resource> resources = resourceDAO.findByTopicId(topicId);
         Topic topic = topicDAO.findById(topicId);
 
-        List<ResourceDTO> resourceDTOs = new ArrayList<>();
-
-        for (Resource resource : resources) {
-            ResourceDTO resourceDTO = resourceService.convertResourceToResourceDTO(resource, 0);
-            resourceDTOs.add(resourceDTO);
-        }
-
+        List<ResourceDTO> resourceDTOs = resourceService.convertResourcesToResourceDTOsWithIsAddedProperty(resources);
         response.addObject("resources", resourceDTOs);
+        
         response.addObject("topicName", topic.getName());
         response.addObject("userListId", userService.getCurrentUserDefaultListId());
 
