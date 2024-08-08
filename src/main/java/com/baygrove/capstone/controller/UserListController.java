@@ -1,9 +1,7 @@
 package com.baygrove.capstone.controller;
 
-
 import com.baygrove.capstone.database.dao.ResourceDAO;
 import com.baygrove.capstone.database.dao.ResourceListDAO;
-import com.baygrove.capstone.database.dao.UserDAO;
 import com.baygrove.capstone.database.dao.UserListDAO;
 import com.baygrove.capstone.database.entity.Resource;
 import com.baygrove.capstone.database.entity.ResourceList;
@@ -24,10 +22,6 @@ import java.util.List;
 @Controller
 @RequestMapping("/user-list")
 public class UserListController {
-
-    @Autowired
-    private UserDAO userDAO;
-
     @Autowired
     private UserListDAO userListDAO;
 
@@ -57,7 +51,7 @@ public class UserListController {
 
     @GetMapping("/add-resource")
     public ModelAndView addResourceToUserList(@RequestParam Integer resourceId, @RequestParam(required = false) Integer userListId) {
-        ModelAndView response = new ModelAndView("index");
+        ModelAndView response = new ModelAndView();
 
         if (userListId == null) {
             response.setViewName("redirect:/auth/login");
@@ -67,38 +61,24 @@ public class UserListController {
         UserList userList = userListDAO.findById(userListId);
         Resource resourceToAdd = resourceDAO.findById(resourceId);
 
-        ResourceList resourceList = new ResourceList();
-        resourceList.setUserList(userList);
-        resourceList.setResource(resourceToAdd);
+        ResourceList newResourceList = new ResourceList();
+        newResourceList.setUserList(userList);
+        newResourceList.setResource(resourceToAdd);
 
-        resourceListDAO.save(resourceList);
+        resourceListDAO.save(newResourceList);
 
-        List<Resource> resources = resourceDAO.findAll();
-        List<ResourceDTO> resourceDTOs = new ArrayList<>();
-
-        for (Resource resource : resources) {
-            ResourceDTO resourceDTO = resourceService.convertResourceToResourceDTO(resource, false);
-            resourceDTOs.add(resourceDTO);
-        }
-
-        response.addObject("resources", resourceDTOs);
-        response.addObject("userListId", userListId);
-
+        response.setViewName("redirect:/");
         return response;
     }
 
     @GetMapping("/remove-resource")
     public ModelAndView removeResourceFromUserList(@RequestParam Integer resourceId, @RequestParam Integer userListId) {
-        ModelAndView response = new ModelAndView("index");
+        ModelAndView response = new ModelAndView();
 
         ResourceList resourceList = resourceListDAO.findByListIdAndResourceId(userListId, resourceId);
         resourceListDAO.delete(resourceList);
 
-        List<ResourceList> resourceLists = resourceListDAO.findByListId(userListId);
-
-        response.addObject("userListId", userListId);
-        response.addObject("resources", convertResourceListsToResourceDTOs(resourceLists));
-
+        response.setViewName("redirect:/");
         return response;
     }
 
