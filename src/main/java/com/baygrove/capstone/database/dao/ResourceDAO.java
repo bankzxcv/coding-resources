@@ -12,6 +12,9 @@ import java.util.Map;
 public interface ResourceDAO extends JpaRepository<Resource, Long> {
     Resource findById(Integer id);
 
+    @Query(value = "SELECT * FROM resources WHERE id IN :ids", nativeQuery = true)
+    List<Resource> findByIds(List<Integer> ids);
+
     Resource findByName(String name);
 
     Resource findByUrl(String url);
