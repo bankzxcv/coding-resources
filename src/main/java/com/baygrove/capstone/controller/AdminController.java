@@ -73,8 +73,24 @@ public class AdminController {
 
         log.info("submit-new-resource form: " + form);
 
-        if (form.getImageFile().isEmpty() || bindingResult.hasErrors()) {
-            if (form.getImageFile().isEmpty()) {
+        if (form.getId() == null) {
+            Resource resourceWithThisName = resourceDAO.findByName(form.getName());
+
+            if (resourceWithThisName != null) {
+                bindingResult.rejectValue("name", "name", "This resource name is already in the system.");
+            }
+
+            Resource resourceWithThisUrl = resourceDAO.findByUrl(form.getUrl());
+
+            if (resourceWithThisUrl != null) {
+                bindingResult.rejectValue("url", "url", "This resource url is already in the system.");
+            }
+        }
+
+        boolean noImageOnNewResource = form.getImageUrl() == null && form.getImageFile().isEmpty();
+
+        if (noImageOnNewResource || bindingResult.hasErrors()) {
+            if (noImageOnNewResource) {
                 bindingResult.rejectValue("imageFile", "imageFile", "Resource image is required.");
             }
 
@@ -90,9 +106,17 @@ public class AdminController {
             return response;
         }
 
-        resourceService.createResource(form);
+        if (form.getId() == null) {
+            resourceService.createResource(form);
+        } else {
+            resourceService.editResource(form);
+        }
 
-        response.setViewName("redirect:/");
+        if (authenticatedUserUtilities.isUserInRole("ADMIN")) {
+            response.setViewName("redirect:/admin/dashboard");
+        } else {
+            response.setViewName("redirect:/");
+        }
 
         return response;
     }

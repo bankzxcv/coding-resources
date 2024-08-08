@@ -136,4 +136,32 @@ public class ResourceService {
 
         return resource;
     }
+
+    public Resource editResource(ResourceFormBean form) {
+        Resource resource = resourceDAO.findById(form.getId());
+
+        resource.setName(form.getName());
+        resource.setDescription(form.getDescription());
+        resource.setUrl(form.getUrl());
+        resource.setUpdatedAt(new Date());
+        resource.setStatus(form.getStatus());
+
+        if (!form.getImageFile().isEmpty()) {
+
+            String imageUrl = saveResourceImage(form.getImageFile());
+            resource.setImageUrl(imageUrl);
+        }
+
+        resourceDAO.save(resource);
+
+        List<ResourceTopic> existingResourceTopics = resourceTopicDAO.findByResourceId(resource.getId());
+        resourceTopicDAO.deleteAll(existingResourceTopics);
+
+        List<ResourceTopic> resourceTopics = createResourceTopics(resource, form.getTopicIds());
+        resource.setResourceTopics(resourceTopics);
+
+        resourceDAO.save(resource);
+
+        return resource;
+    }
 }

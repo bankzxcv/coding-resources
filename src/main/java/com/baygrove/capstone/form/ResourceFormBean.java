@@ -1,8 +1,7 @@
 package com.baygrove.capstone.form;
 
 
-import com.baygrove.capstone.validation.resource.ResourceNameUnique;
-import com.baygrove.capstone.validation.resource.ResourceUrlUnique;
+import com.baygrove.capstone.database.enums.ResourceStatus;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,11 +17,9 @@ import java.util.List;
 public class ResourceFormBean {
     private Integer id;
 
-    @ResourceNameUnique
     @NotEmpty
     private String name;
 
-    @ResourceUrlUnique
     @NotEmpty
     private String url;
 
@@ -36,9 +33,11 @@ public class ResourceFormBean {
 
     private List<Integer> topicIds;
 
-    private String status;
+    private List<Integer> categoryIds;
 
-    private Date createdAt;
+    private ResourceStatus status;
 
-    private Date updatedAt;
+    private String createdAt;
+
+    private String updatedAt;
 }

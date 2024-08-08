@@ -7,6 +7,10 @@
       style="width: 90%; max-width: 650px"
       class="border p-4 rounded-2">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+    <input type="hidden" name="id" value="${form.id}"/>
+    <input type="hidden" name="imageUrl" value="${form.imageUrl}"/>
+    <input type="hidden" name="status" value="${form.status}"/>
+    <input type="hidden" name="createdAt" value="${form.createdAt}"/>
 
     <h1 class="text-center mb-4">Resource</h1>
 
@@ -34,9 +38,9 @@
     </div>
     <div class="mb-3">
         <label for="description" class="form-label">Description</label>
-        <textarea value="${form.description}" name="description"
+        <textarea name="description"
                   class="form-control <c:if test="${bindingResult.hasFieldErrors('description')}">is-invalid</c:if>"
-                  id="description" rows="5"></textarea>
+                  id="description" rows="5">${form.description}</textarea>
         <c:if test="${bindingResult.hasFieldErrors('description')}">
             <c:forEach items="${bindingResult.getFieldErrors('description')}" var="error">
                 <div class="text-danger">${error.defaultMessage}</div>
@@ -64,6 +68,7 @@
                         name="topicIds"
                         value="${topic.id}"
                         id="${topic.name.toLowerCase()}"
+                        <c:if test="${form.topicIds.contains(topic.id)}">checked</c:if>
                 />
                 <label class="form-check-label" for="${topic.name.toLowerCase()}"> ${topic.name} </label>
             </div>

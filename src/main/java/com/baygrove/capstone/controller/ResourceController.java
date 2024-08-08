@@ -4,11 +4,15 @@ package com.baygrove.capstone.controller;
 import com.baygrove.capstone.database.dao.ResourceDAO;
 import com.baygrove.capstone.database.dao.TopicDAO;
 import com.baygrove.capstone.database.entity.Resource;
+import com.baygrove.capstone.database.entity.ResourceTopic;
 import com.baygrove.capstone.database.entity.Topic;
 import com.baygrove.capstone.dto.ResourceDTO;
+import com.baygrove.capstone.form.ResourceFormBean;
 import com.baygrove.capstone.service.ResourceService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -70,6 +74,30 @@ public class ResourceController {
 
         response.addObject("searchTerm", search);
 
+
+        return response;
+    }
+
+    @PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("edit")
+    public ModelAndView getAdminEditResource(@RequestParam Integer resourceId) {
+        ModelAndView response = new ModelAndView("admin/resource-form");
+        Resource resource = resourceDAO.findById(resourceId);
+
+        ResourceFormBean form = new ResourceFormBean();
+
+        BeanUtils.copyProperties(resource, form);
+
+        List<Integer> topicIds = resource.getResourceTopics().stream().map(resourceTopic -> resourceTopic.getTopicId()).toList();
+        form.setTopicIds(topicIds);
+
+        List<Integer> categoryIds = resource.getResourceCategories().stream().map(resourceCategory -> resourceCategory.getCategoryId()).toList();
+        form.setCategoryIds(categoryIds);
+
+        response.addObject("form", form);
+
+        List<Topic> topics = topicDAO.findAllByOrderByNameAsc();
+        response.addObject("topics", topics);
 
         return response;
     }
