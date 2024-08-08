@@ -54,12 +54,16 @@ public class ResourceService {
         return imageUrl;
     }
 
-    public List<ResourceTopic> createResourceTopics(Resource resource, List<Integer> topicIds) {
+    public List<ResourceTopic> createResourceTopics(Resource resource, List<Integer> topicIds) throws Exception {
         List<ResourceTopic> resourceTopics = new ArrayList<>();
 
         for (Integer topicId : topicIds) {
             // find topic
             Topic topic = topicDAO.findById(topicId);
+
+            if (topic == null) {
+                throw new Exception("Invalid topic id");
+            }
 
             // create resource topic
             ResourceTopic resourceTopic = new ResourceTopic();
@@ -114,7 +118,7 @@ public class ResourceService {
     }
 
 
-    public Resource createResource(ResourceFormBean form) {
+    public Resource createResource(ResourceFormBean form) throws Exception {
         Resource resource = new Resource();
 
         resource.setName(form.getName());
@@ -137,7 +141,7 @@ public class ResourceService {
         return resource;
     }
 
-    public Resource editResource(ResourceFormBean form) {
+    public Resource editResource(ResourceFormBean form) throws Exception {
         Resource resource = resourceDAO.findById(form.getId());
 
         resource.setName(form.getName());
