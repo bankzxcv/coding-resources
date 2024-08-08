@@ -23,16 +23,23 @@
                     <a href="/resources/detail/${resource.id}" target="_blank">
                         <h2 class="card-title">${requestScope.resource.name}</h2>
                     </a>
-                    <c:choose>
-                        <c:when test="${resource.isAdded == 1}">
-                            <a href="/user-list/remove-resource?userListId=${sessionScope.userListId}&resourceId=${resource.id}"
-                               class="btn btn-danger">REMOVE FROM LIST</a>
-                        </c:when>
-                        <c:otherwise>
-                            <a href="/user-list/add-resource?userListId=${sessionScope.userListId}&resourceId=${resource.id}"
-                               class="btn btn-primary">+ ADD TO LIST</a>
-                        </c:otherwise>
-                    </c:choose>
+                    <c:if test="${isAdmin == true}">
+                        <a href="/resources/edit&resourceId=${resource.id}"
+                           class="btn btn-primary">EDIT</a>
+                    </c:if>
+                    <c:if test="${isAdmin != true}">
+                        <div class="alert alert-info d-inline w-40 mt-3" role="alert">Search: "${searchTerm}"</div>
+                        <c:choose>
+                            <c:when test="${resource.isAdded == 1}">
+                                <a href="/user-list/remove-resource?userListId=${sessionScope.userListId}&resourceId=${resource.id}"
+                                   class="btn btn-danger">REMOVE FROM LIST</a>
+                            </c:when>
+                            <c:otherwise>
+                                <a href="/user-list/add-resource?userListId=${sessionScope.userListId}&resourceId=${resource.id}"
+                                   class="btn btn-primary">+ ADD TO LIST</a>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:if>
                 </div>
 
                 <p class="card-text card-description">

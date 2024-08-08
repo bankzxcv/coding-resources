@@ -3,8 +3,10 @@ package com.baygrove.capstone.controller;
 
 import com.baygrove.capstone.database.dao.ResourceDAO;
 import com.baygrove.capstone.database.dao.TopicDAO;
+import com.baygrove.capstone.database.entity.Resource;
 import com.baygrove.capstone.database.entity.Topic;
 import com.baygrove.capstone.database.entity.User;
+import com.baygrove.capstone.dto.ResourceDTO;
 import com.baygrove.capstone.form.ResourceFormBean;
 import com.baygrove.capstone.security.AuthenticatedUserUtilities;
 import com.baygrove.capstone.service.ResourceService;
@@ -50,9 +52,11 @@ public class AdminController {
     public ModelAndView adminDashboard() {
         ModelAndView response = new ModelAndView("admin/dashboard");
 
-        User user = authenticatedUserUtilities.getCurrentUser();
 
-        log.info("user: " + user.toString());
+        List<Resource> resources = resourceDAO.findAll();
+        response.addObject("resources", resources);
+        response.addObject("isAdmin", true);
+
         return response;
     }
 
