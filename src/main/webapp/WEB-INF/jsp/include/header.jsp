@@ -111,7 +111,9 @@
                         </li>
                     </sec:authorize>
                     <li class="nav-item flex-row-center-center">
-                        <span class="nav-link fs-6"><sec:authentication property="name"/></span>
+                        User: <sec:authentication property="name"/>
+                        <br/>
+                        Roles: <sec:authentication property="principal.authorities"/>
                     </li>
                     <form class="flex-row-center-center" action="/auth/logout" method="post">
                         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
