@@ -31,4 +31,8 @@ public interface ResourceDAO extends JpaRepository<Resource, Long> {
     @Query(value = "SELECT *, (SELECT count(*) FROM resources_lists rl WHERE rl.resource_id = r.id AND rl.list_id = :userListId) AS isAdded " +
             "FROM resources r;", nativeQuery = true)
     List<Map<String, Object>> findAllWithIsAddedToUserList(Integer userListId);
+
+    @Query("select r from Resource r where LOWER(r.name) like LOWER(concat('%', :name, '%'))")
+    List<Resource> findByNameLike(String name);
+
 }

@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -45,11 +46,8 @@ public class ResourceController {
 
         List<ResourceDTO> resourceDTOs = resourceService.convertResourcesToResourceDTOsWithIsAddedProperty(resources);
         response.addObject("resources", resourceDTOs);
-        
+
         response.addObject("topicName", topic.getName());
-        response.addObject("userListId", userService.getCurrentUserDefaultListId());
-
-
         return response;
     }
 
@@ -63,7 +61,20 @@ public class ResourceController {
         Resource resource = resourceDAO.findById(resourceId);
 
         response.addObject("resource", resource);
-        response.addObject("userListId", userService.getCurrentUserDefaultListId());
+        return response;
+    }
+
+    @GetMapping("search")
+    public ModelAndView searchResource(@RequestParam(required = false) String search) {
+        ModelAndView response = new ModelAndView("index");
+
+        List<Resource> resources = resourceDAO.findByNameLike(search);
+
+        List<ResourceDTO> resourceDTOs = resourceService.convertResourcesToResourceDTOsWithIsAddedProperty(resources);
+        response.addObject("resources", resourceDTOs);
+
+        response.addObject("searchTerm", search);
+
 
         return response;
     }
