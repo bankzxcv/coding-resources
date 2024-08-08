@@ -54,7 +54,6 @@ public class IndexController {
 
         List<Topic> topics = topicDAO.findAllByOrderByNameAsc();
         session.setAttribute("topics", topics);
-        session.setAttribute("userListId", userService.getCurrentUserDefaultListId());
 
         return response;
     }

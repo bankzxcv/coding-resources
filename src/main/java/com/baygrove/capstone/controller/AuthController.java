@@ -64,6 +64,8 @@ public class AuthController {
         // Authenticate the user after creating account
         authenticatedUserUtilities.manualAuthentication(session, form.getEmail(), form.getPassword());
 
+        session.setAttribute("userListId", userService.getCurrentUserDefaultListId());
+
         // redirect to home page
         response.setViewName("redirect:/");
 
@@ -72,8 +74,9 @@ public class AuthController {
     }
 
     @GetMapping("login")
-    public ModelAndView getLogin() {
+    public ModelAndView getLogin(HttpSession session) {
         ModelAndView response = new ModelAndView("auth/log-in-form");
+        session.setAttribute("userListId", userService.getCurrentUserDefaultListId());
 
         return response;
     }
