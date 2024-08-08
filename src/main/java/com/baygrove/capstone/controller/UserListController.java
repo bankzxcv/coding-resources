@@ -42,7 +42,7 @@ public class UserListController {
 
         for (ResourceList resourceList : resourceLists) {
             Resource resource = resourceDAO.findById(resourceList.getResourceId());
-            ResourceDTO resourceDTO = resourceService.convertResourceToResourceDTO(resource, true);
+            ResourceDTO resourceDTO = resourceService.convertResourceToResourceDTO(resource, 1);
             resourceDTOs.add(resourceDTO);
         }
 
@@ -78,6 +78,7 @@ public class UserListController {
         ResourceList resourceList = resourceListDAO.findByListIdAndResourceId(userListId, resourceId);
         resourceListDAO.delete(resourceList);
 
+        // TODO: make it stay the same page
         response.setViewName("redirect:/");
         return response;
     }
