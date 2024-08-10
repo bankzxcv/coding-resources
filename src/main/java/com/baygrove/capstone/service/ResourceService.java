@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.beans.BeanUtils;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -167,5 +168,18 @@ public class ResourceService {
         resourceDAO.save(resource);
 
         return resource;
+    }
+
+    public void addResourceFormOptions(ModelAndView response) {
+        List<Topic> topics = topicDAO.findAllByOrderByNameAsc();
+        response.addObject("topics", topics);
+
+        List<ResourceStatus> statuses = new ArrayList<>();
+        statuses.add(ResourceStatus.Pending);
+        statuses.add(ResourceStatus.Draft);
+        statuses.add(ResourceStatus.Publish);
+        statuses.add(ResourceStatus.Private);
+        statuses.add(ResourceStatus.Archive);
+        response.addObject("statuses", statuses);
     }
 }

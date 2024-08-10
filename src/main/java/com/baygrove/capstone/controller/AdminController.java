@@ -4,10 +4,6 @@ package com.baygrove.capstone.controller;
 import com.baygrove.capstone.database.dao.ResourceDAO;
 import com.baygrove.capstone.database.dao.TopicDAO;
 import com.baygrove.capstone.database.entity.Resource;
-import com.baygrove.capstone.database.entity.Topic;
-import com.baygrove.capstone.database.entity.User;
-import com.baygrove.capstone.database.enums.ResourceStatus;
-import com.baygrove.capstone.dto.ResourceDTO;
 import com.baygrove.capstone.form.ResourceFormBean;
 import com.baygrove.capstone.security.AuthenticatedUserUtilities;
 import com.baygrove.capstone.service.ResourceService;
@@ -24,7 +20,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -44,11 +39,6 @@ public class AdminController {
     @Autowired
     ResourceService resourceService;
 
-    private void addTopicsToReponse(ModelAndView response) {
-        List<Topic> topics = topicDAO.findAllByOrderByNameAsc();
-
-        response.addObject("topics", topics);
-    }
 
     @GetMapping("/dashboard")
     public ModelAndView adminDashboard() {
@@ -65,15 +55,10 @@ public class AdminController {
     @GetMapping("add-new-resource")
     public ModelAndView addNewResource() {
         ModelAndView response = new ModelAndView("admin/resource-form");
-        addTopicsToReponse(response);
-
-        List<ResourceStatus> statuses = new ArrayList<>();
-        statuses.add(ResourceStatus.Pending);
-        statuses.add(ResourceStatus.Active);
-        response.addObject("statuses", statuses);
-
+        resourceService.addResourceFormOptions(response);
         return response;
     }
+
 
     @PostMapping("/submit-new-resource")
     public ModelAndView submitNewResource(@Valid ResourceFormBean form, BindingResult bindingResult) throws Exception {
@@ -108,11 +93,7 @@ public class AdminController {
 
             response.addObject("bindingResult", bindingResult);
             response.addObject("form", form);
-            addTopicsToReponse(response);
-            List<ResourceStatus> statuses = new ArrayList<>();
-            statuses.add(ResourceStatus.Pending);
-            statuses.add(ResourceStatus.Active);
-            response.addObject("statuses", statuses);
+            resourceService.addResourceFormOptions(response);
 
             response.setViewName("admin/resource-form");
             return response;

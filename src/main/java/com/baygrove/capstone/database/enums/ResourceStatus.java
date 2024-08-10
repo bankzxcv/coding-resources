@@ -1,5 +1,6 @@
 package com.baygrove.capstone.database.enums;
 
+
 public enum ResourceStatus {
-    Pending, Active
+    Pending, Draft, Publish, Private, Hidden, Archive
 }
