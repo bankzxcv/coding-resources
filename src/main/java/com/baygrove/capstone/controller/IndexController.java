@@ -37,8 +37,7 @@ public class IndexController {
 
     @Autowired
     private TopicDAO topicDAO;
-
-
+    
     @GetMapping("/")
     public ModelAndView index(HttpSession session) {
         ModelAndView response = new ModelAndView("index");
