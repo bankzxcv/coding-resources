@@ -101,27 +101,38 @@
                     </li>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/user-list/all">My Resources</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/account/settings">Account Settings</a>
-                    </li>
                     <sec:authorize access="hasAuthority('ADMIN')">
                         <li class="nav-item mx-2">
                             <a class="nav-link px-3 text-center btn btn-primary"
                                href="/admin/dashboard">Admin Dashboard</a>
                         </li>
                     </sec:authorize>
-                    <li class="nav-item flex-row-center-center">
-                        User: <sec:authentication property="name"/>
-                        <br/>
-                        Roles: <sec:authentication property="principal.authorities"/>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button"
+                           data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            <sec:authentication property="name"/>
+                                <%--                                Roles: <sec:authentication property="principal.authorities"/>--%>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a class="dropdown-item p-2 px-4" href="/user-list/all">My
+                                    Resources</a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item p-2 px-4" href="/account/settings">My Account</a>
+                            </li>
+                            <li role="button" onclick="logoutForm.submit();">
+                                <form id="logoutForm" class="dropdown-item p-2 px-4" action="/auth/logout"
+                                      method="post">
+                                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                                    <input class="border-0 bg-transparent p-0" type="submit"
+                                           value="Log Out"/>
+                                </form>
+                            </li>
+                        </ul>
                     </li>
-                    <form class="flex-row-center-center" action="/auth/logout" method="post">
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <input class="nav-item px-3 btn btn-outline-secondary" type="submit" value="Log Out"/>
-                    </form>
                 </sec:authorize>
             </ul>
         </div>
