@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <jsp:include page="../include/header.jsp"/>
 
-<h1>Account Settings Form</h1>
+<h1>Account Settings</h1>
 
 <form action="/account/settings/update/submit" method="post">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
