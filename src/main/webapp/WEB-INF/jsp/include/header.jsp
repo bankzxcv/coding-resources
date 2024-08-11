@@ -101,6 +101,9 @@
                     </li>
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user-list/all">My Resources</a>
+                    </li>
                     <sec:authorize access="hasAuthority('ADMIN')">
                         <li class="nav-item mx-2">
                             <a class="nav-link px-3 text-center btn btn-primary"
@@ -117,8 +120,7 @@
                         </a>
                         <ul class="dropdown-menu">
                             <li>
-                                <a class="dropdown-item p-2 px-4" href="/user-list/all">My
-                                    Resources</a>
+                                <a class="dropdown-item p-2 px-4" href="/user-list/all">My Resources</a>
                             </li>
                             <li>
                                 <a class="dropdown-item p-2 px-4" href="/account/settings">My Account</a>
