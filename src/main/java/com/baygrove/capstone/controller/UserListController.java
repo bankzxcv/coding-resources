@@ -9,6 +9,7 @@ import com.baygrove.capstone.database.entity.UserList;
 import com.baygrove.capstone.dto.ResourceDTO;
 import com.baygrove.capstone.service.ResourceService;
 import com.baygrove.capstone.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,7 +38,7 @@ public class UserListController {
     private ResourceService resourceService;
 
     @GetMapping("/add-resource")
-    public ModelAndView addResourceToUserList(@RequestParam Integer resourceId, @RequestParam(required = false) Integer userListId) {
+    public ModelAndView addResourceToUserList(@RequestParam Integer resourceId, @RequestParam(required = false) Integer userListId, HttpServletRequest request) {
         ModelAndView response = new ModelAndView();
 
         if (userListId == null) {
@@ -54,19 +55,24 @@ public class UserListController {
 
         resourceListDAO.save(newResourceList);
 
-        response.setViewName("redirect:/");
+        // redirect to previous page
+        String referrer = request.getHeader("referer");
+        response.setViewName("redirect:" + referrer);
+
         return response;
     }
 
     @GetMapping("/remove-resource")
-    public ModelAndView removeResourceFromUserList(@RequestParam Integer resourceId, @RequestParam Integer userListId) {
+    public ModelAndView removeResourceFromUserList(@RequestParam Integer resourceId, @RequestParam Integer userListId, HttpServletRequest request) {
         ModelAndView response = new ModelAndView();
 
         ResourceList resourceList = resourceListDAO.findByListIdAndResourceId(userListId, resourceId);
         resourceListDAO.delete(resourceList);
 
-        // TODO: make it stay the same page
-        response.setViewName("redirect:/");
+        // redirect to previous page
+        String referrer = request.getHeader("referer");
+        response.setViewName("redirect:" + referrer);
+
         return response;
     }
 
