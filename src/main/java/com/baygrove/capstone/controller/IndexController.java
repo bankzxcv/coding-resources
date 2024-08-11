@@ -37,12 +37,13 @@ public class IndexController {
 
     @Autowired
     private TopicDAO topicDAO;
-    
+
     @GetMapping("/")
     public ModelAndView index(HttpSession session) {
         ModelAndView response = new ModelAndView("index");
 //        List<Map<String, Object>> resources = resourceDAO.findAllWithIsAddedToUserList(userListId);
         // TODO: Fix this? resource's topics relationships are not included
+        session.setAttribute("userListId", userService.getCurrentUserDefaultListId());
 
         List<Resource> resources = resourceDAO.findAll();
         List<ResourceDTO> resourceDTOs = resourceService.convertResourcesToResourceDTOsWithIsAddedProperty(resources);

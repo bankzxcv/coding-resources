@@ -72,7 +72,6 @@ public class AuthController {
     @GetMapping("login")
     public ModelAndView getLogin(HttpSession session) {
         ModelAndView response = new ModelAndView("auth/log-in-form");
-        session.setAttribute("userListId", userService.getCurrentUserDefaultListId());
 
         return response;
     }
