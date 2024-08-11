@@ -31,7 +31,7 @@
                         <c:choose>
                             <c:when test="${resource.isAdded == 1}">
                                 <a href="/user-list/remove-resource?userListId=${sessionScope.userListId}&resourceId=${resource.id}"
-                                   class="btn btn-danger">REMOVE FROM LIST</a>
+                                   class="btn btn-outline-danger">REMOVE FROM LIST</a>
                             </c:when>
                             <c:otherwise>
                                 <a href="/user-list/add-resource?userListId=${sessionScope.userListId}&resourceId=${resource.id}"
