@@ -9,10 +9,12 @@ import java.util.List;
 public interface TopicDAO extends JpaRepository<Topic, Long> {
     Topic findById(Integer id);
 
+    Topic findByName(String name);
+
     @Nonnull
     List<Topic> findAll();
 
     List<Topic> findAllByOrderByIdAsc();
-    
+
     List<Topic> findAllByOrderByNameAsc();
 }
