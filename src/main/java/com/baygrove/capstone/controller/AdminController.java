@@ -4,6 +4,7 @@ package com.baygrove.capstone.controller;
 import com.baygrove.capstone.database.dao.ResourceDAO;
 import com.baygrove.capstone.database.dao.TopicDAO;
 import com.baygrove.capstone.database.entity.Resource;
+import com.baygrove.capstone.database.enums.ResourceStatus;
 import com.baygrove.capstone.form.ResourceFormBean;
 import com.baygrove.capstone.security.AuthenticatedUserUtilities;
 import com.baygrove.capstone.service.ResourceService;
@@ -18,6 +19,7 @@ import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -41,11 +43,20 @@ public class AdminController {
 
 
     @GetMapping("/dashboard")
-    public ModelAndView adminDashboard() {
+    public ModelAndView adminDashboard(@RequestParam(required = false) ResourceStatus status) {
         ModelAndView response = new ModelAndView("admin/dashboard");
+        List<Resource> resources;
 
+        if (status == ResourceStatus.Publish) {
+            resources = resourceDAO.findByStatus(ResourceStatus.Publish);
+        } else if (status == ResourceStatus.Pending) {
+            resources = resourceDAO.findByStatus(ResourceStatus.Pending);
+        } else if (status == ResourceStatus.Archive) {
+            resources = resourceDAO.findByStatus(ResourceStatus.Archive);
+        } else {
+            resources = resourceDAO.findAll();
+        }
 
-        List<Resource> resources = resourceDAO.findAll();
         response.addObject("resources", resources);
         response.addObject("isAdmin", true);
 
