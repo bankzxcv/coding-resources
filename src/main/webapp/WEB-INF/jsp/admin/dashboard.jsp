@@ -9,25 +9,27 @@
     <div>
         <strong>Status:</strong>
 
-        <input type="radio" id="all" name="status" value="All"
+        <input type="radio" id="all" name="status" value="All" class="filter-status-radio-button"
                <c:if test="${param.status == null}">checked</c:if>>
         <label for="all">All</label>
 
-        <input type="radio" id="publish" name="status" value="Publish"
+        <input type="radio" id="publish" name="status" value="Publish" class="filter-status-radio-button"
                <c:if test="${param.status == 'Publish'}">checked</c:if>>
         <label for="publish">Publish</label>
 
-        <input type="radio" id="pending" name="status" value="Pending"
+        <input type="radio" id="pending" name="status" value="Pending" class="filter-status-radio-button"
                <c:if test="${param.status == 'Pending'}">checked</c:if>>
         <label for="pending">Pending</label>
 
-        <input type="radio" id="archive" name="status" value="Archive"
+        <input type="radio" id="archive" name="status" value="Archive" class="filter-status-radio-button"
                <c:if test="${param.status == 'Archive'}">checked</c:if>>
         <label for="archive">Archive</label>
     </div>
 
     <a class="btn btn-primary mt-3 mb-4" href="/admin/add-new-resource">+ Add New Resource</a>
 </form>
+
+<c:if test="${resources.size() == 0}"><p class="fs-2 mt-4">No resource with status ${param.status}</p></c:if>
 
 <c:forEach items="${resources}" var="resource">
     <c:set var="resource" value="${resource}" scope="request"/>
