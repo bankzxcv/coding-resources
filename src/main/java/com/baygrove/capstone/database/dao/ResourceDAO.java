@@ -1,6 +1,7 @@
 package com.baygrove.capstone.database.dao;
 
 import com.baygrove.capstone.database.entity.Resource;
+import com.baygrove.capstone.database.enums.ResourceStatus;
 import com.baygrove.capstone.dto.ResourceDTO;
 import jakarta.annotation.Nonnull;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -21,6 +22,8 @@ public interface ResourceDAO extends JpaRepository<Resource, Long> {
 
     @Nonnull
     List<Resource> findAll();
+
+    List<Resource> findByStatus(ResourceStatus status);
 
     @Query(value = "SELECT r.id, r.name, r.url, r.description, r.image_url, r.status, r.created_at, r.updated_at " +
             "FROM resources r " +
