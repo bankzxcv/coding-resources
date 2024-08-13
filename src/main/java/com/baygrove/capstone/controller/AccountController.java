@@ -67,7 +67,7 @@ public class AccountController {
         User userByUsername = userDAO.findByUsernameIgnoreCase(form.getUsername());
 
 
-        if (userByUsername != null && userByUsername.getUsername() != currentUser.getUsername()) {
+        if (userByUsername != null && !userByUsername.getUsername().equals(currentUser.getUsername())) {
             bindingResult.rejectValue("username", "username", "This username is already in use.");
         }
 
@@ -86,12 +86,12 @@ public class AccountController {
         currentUser.setUsername(form.getUsername());
 
         String encryptedPassword = passwordEncoder.encode(form.getPassword());
+
         currentUser.setPassword(encryptedPassword);
 
         userDAO.save(currentUser);
 
         response.setViewName("redirect:/account/settings");
-
 
         return response;
     }
