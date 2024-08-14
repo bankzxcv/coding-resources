@@ -30,7 +30,7 @@
 <!-- Nav Bar -->
 <nav class="navbar navbar-expand-lg bg-light">
     <div class="container">
-        <a class="navbar-brand" href="#"
+        <a class="navbar-brand" href="/"
         ><img src="/assets/img/logo/logo.png"
         /></a>
         <button
