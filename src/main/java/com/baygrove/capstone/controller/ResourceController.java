@@ -40,7 +40,7 @@ public class ResourceController {
     public ModelAndView resourcesByTopic(@PathVariable(name = "id") Integer topicId) {
         ModelAndView response = new ModelAndView("resource/resources-by-topic");
 
-        List<Resource> resources = resourceDAO.findByTopicId(topicId);
+        List<Resource> resources = resourceDAO.findPublishResourcesByTopicId(topicId);
         Topic topic = topicDAO.findById(topicId);
 
         List<ResourceDTO> resourceDTOs = resourceService.convertResourcesToResourceDTOsWithIsAddedProperty(resources);

@@ -31,6 +31,13 @@ public interface ResourceDAO extends JpaRepository<Resource, Long> {
             "JOIN topics t ON rt.topic_id = t.id;", nativeQuery = true)
     List<Resource> findByTopicId(Integer topicId);
 
+    @Query(value = "SELECT r.id, r.name, r.url, r.description, r.image_url, r.status, r.created_at, r.updated_at " +
+            "FROM resources r " +
+            "JOIN resources_topics rt ON rt.resource_id = r.id AND rt.topic_id = :topicId " +
+            "JOIN topics t ON rt.topic_id = t.id " +
+            "WHERE r.status = 'Publish';", nativeQuery = true)
+    List<Resource> findPublishResourcesByTopicId(Integer topicId);
+
     @Query(value = "SELECT *, (SELECT count(*) FROM resources_lists rl WHERE rl.resource_id = r.id AND rl.list_id = :userListId) AS isAdded " +
             "FROM resources r;", nativeQuery = true)
     List<Map<String, Object>> findAllWithIsAddedToUserList(Integer userListId);
