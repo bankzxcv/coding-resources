@@ -50,7 +50,7 @@
         >
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/"
+                    <a id="nav-link-home" class="nav-link" aria-current="page" href="/"
                     >Home</a
                     >
                 </li>
@@ -77,12 +77,12 @@
                 <%--                    </ul>--%>
                 <%--                </li>--%>
                 <li class="nav-item dropdown">
-                    <a
-                            class="nav-link dropdown-toggle"
-                            href="#"
-                            role="button"
-                            data-bs-toggle="dropdown"
-                            aria-expanded="false"
+                    <a id="nav-link-topics"
+                       class="nav-link dropdown-toggle"
+                       href="#"
+                       role="button"
+                       data-bs-toggle="dropdown"
+                       aria-expanded="false"
                     >
                         Topics
                     </a>
@@ -102,11 +102,11 @@
                 </sec:authorize>
                 <sec:authorize access="isAuthenticated()">
                     <li class="nav-item">
-                        <a class="nav-link" href="/user-list/all">My Resources</a>
+                        <a id="nav-link-my-resources" class="nav-link" href="/user-list/all">My Resources</a>
                     </li>
                     <sec:authorize access="hasAuthority('ADMIN')">
                         <li class="nav-item mx-2">
-                            <a class="nav-link px-3 text-center btn btn-primary"
+                            <a id="nav-link-admin-dashboard" class="nav-link px-3 text-center btn btn-primary"
                                href="/admin/dashboard">Admin Dashboard</a>
                         </li>
                     </sec:authorize>

@@ -9,6 +9,7 @@
         integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
         crossorigin="anonymous"
 ></script>
+<script src="/assets/js/index.js"></script>
 <script src="/assets/js/admin-dashboard.js"></script>
 </body>
 </html>
