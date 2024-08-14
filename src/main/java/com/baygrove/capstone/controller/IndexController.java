@@ -5,6 +5,7 @@ import com.baygrove.capstone.database.dao.ResourceListDAO;
 import com.baygrove.capstone.database.dao.TopicDAO;
 import com.baygrove.capstone.database.dao.UserListDAO;
 import com.baygrove.capstone.database.entity.*;
+import com.baygrove.capstone.database.enums.ResourceStatus;
 import com.baygrove.capstone.dto.ResourceDTO;
 import com.baygrove.capstone.service.ResourceService;
 import com.baygrove.capstone.service.UserService;
@@ -45,7 +46,7 @@ public class IndexController {
         // TODO: Fix this? resource's topics relationships are not included
         session.setAttribute("userListId", userService.getCurrentUserDefaultListId());
 
-        List<Resource> resources = resourceDAO.findAll();
+        List<Resource> resources = resourceDAO.findByStatus(ResourceStatus.Publish);
         List<ResourceDTO> resourceDTOs = resourceService.convertResourcesToResourceDTOsWithIsAddedProperty(resources);
         response.addObject("resources", resourceDTOs);
 
