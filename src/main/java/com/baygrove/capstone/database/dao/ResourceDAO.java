@@ -38,4 +38,7 @@ public interface ResourceDAO extends JpaRepository<Resource, Long> {
     @Query("select r from Resource r where LOWER(r.name) like LOWER(concat('%', :name, '%'))")
     List<Resource> findByNameLike(String name);
 
+    @Query("select r from Resource r where r.status = 'Publish' and LOWER(r.name) like LOWER(concat('%', :name, '%'))")
+    List<Resource> findPublishResourcesByNameLike(String name);
+
 }

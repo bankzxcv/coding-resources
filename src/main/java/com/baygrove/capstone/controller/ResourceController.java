@@ -5,6 +5,7 @@ import com.baygrove.capstone.database.dao.ResourceDAO;
 import com.baygrove.capstone.database.dao.TopicDAO;
 import com.baygrove.capstone.database.entity.Resource;
 import com.baygrove.capstone.database.entity.Topic;
+import com.baygrove.capstone.database.enums.ResourceStatus;
 import com.baygrove.capstone.dto.ResourceDTO;
 import com.baygrove.capstone.form.ResourceFormBean;
 import com.baygrove.capstone.service.ResourceService;
@@ -66,7 +67,7 @@ public class ResourceController {
     public ModelAndView searchResource(@RequestParam(required = false) String search) {
         ModelAndView response = new ModelAndView("index");
 
-        List<Resource> resources = resourceDAO.findByNameLike(search);
+        List<Resource> resources = resourceDAO.findPublishResourcesByNameLike(search);
 
         List<ResourceDTO> resourceDTOs = resourceService.convertResourcesToResourceDTOsWithIsAddedProperty(resources);
         response.addObject("resources", resourceDTOs);
