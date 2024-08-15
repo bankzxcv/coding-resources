@@ -31,3 +31,6 @@ list, and keep track of valuable learning materials.
   resources by topics.
 - **Add to My Resources**: Click the "Add" button next to a resource to save it to your personal list.
 - **View My Resources**: Navigate to the "My Resources" section to see your saved items.
+
+User Interface
+![Screen Shot 2024-08-14 at 10 08 56 PM](https://github.com/user-attachments/assets/9cdef9c6-f1fc-41ee-8664-f3f4f591ae16)
