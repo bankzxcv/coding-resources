@@ -106,7 +106,7 @@
                     </li>
                     <sec:authorize access="hasAuthority('ADMIN')">
                         <li class="nav-item mx-2">
-                            <a id="nav-link-admin-dashboard" class="nav-link px-3 text-center btn btn-primary"
+                            <a id="nav-link-admin-dashboard" class="nav-link px-3 text-center btn btn-outline-primary"
                                href="/admin/dashboard">Admin Dashboard</a>
                         </li>
                     </sec:authorize>

@@ -39,7 +39,19 @@ a {
 .btn-outline-primary:hover {
     border-color: #0e9a6c;
     background-color: #0f9e6f;
+    color: #fff;
+}
 
+.btn.btn-outline-primary.active {
+    border-color: #0e9a6c;
+    background-color: #0f9e6f;
+    color: #fff;
+}
+
+.btn.btn-outline-primary:active, .btn.btn-primary:active {
+    border-color: #0c855d;
+    background-color: #0b7553;
+    color: #fff;
 }
 
 .btn-secondary {
@@ -60,6 +72,12 @@ a {
 .btn-outline-secondary:hover {
     background-color: #d3753a;
     border-color: #d3753a;
+    color: #fff;
+}
+
+.btn.btn-outline-secondary:active, .btn.btn-secondary:active {
+    background-color: #cb692d;
+    border-color: #bb622a;
     color: #fff;
 }
 
