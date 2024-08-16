@@ -35,7 +35,7 @@
     </div>
     <p>
         Don't have an account?
-        <a class="py-2" href="/user/signup">Sign Up</a>
+        <a class="py-2 text-primary" href="/auth/signup">Sign Up</a>
     </p>
     <button type="submit" class="btn btn-primary">Log In</button>
 </form>

@@ -46,7 +46,7 @@
     </div>
     <p>
         Already have an account?
-        <a class="py-2" href="/user/login">Log In</a>
+        <a class="py-2 text-primary" href="/auth/login">Log In</a>
     </p>
     <button type="submit" class="btn btn-primary">Sign Up</button>
 </form>
