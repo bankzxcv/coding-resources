@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Set;
 
 @Slf4j
 @Controller
@@ -59,7 +60,11 @@ public class ResourceController {
 
         Resource resource = resourceDAO.findById(resourceId);
 
-        response.addObject("resource", resource);
+        Set<Integer> addedResourceIdSet = resourceService.getCurrentUserAddedResourceIdSet();
+        boolean isAdded = addedResourceIdSet.contains(resource.getId());
+        ResourceDTO resourceDTO = resourceService.convertResourceToResourceDTO(resource, isAdded ? 1 : 0);
+
+        response.addObject("resource", resourceDTO);
         return response;
     }
 

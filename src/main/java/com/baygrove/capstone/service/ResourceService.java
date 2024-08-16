@@ -97,16 +97,22 @@ public class ResourceService {
         return resourceDTO;
     }
 
-    public List<ResourceDTO> convertResourcesToResourceDTOsWithIsAddedProperty(List<Resource> resources) {
-        List<ResourceDTO> resourceDTOs = new ArrayList<>();
-
+    public Set<Integer> getCurrentUserAddedResourceIdSet() {
         Integer userListId = userService.getCurrentUserDefaultListId();
+
         List<ResourceList> resourceLists = resourceListDAO.findByListId(userListId);
 
         Set<Integer> set = new HashSet<>();
         for (ResourceList resourceList : resourceLists) {
             set.add(resourceList.getResourceId());
         }
+
+        return set;
+    }
+
+    public List<ResourceDTO> convertResourcesToResourceDTOsWithIsAddedProperty(List<Resource> resources) {
+        List<ResourceDTO> resourceDTOs = new ArrayList<>();
+        Set<Integer> set = getCurrentUserAddedResourceIdSet();
 
         for (Resource resource : resources) {
             boolean isAdded = set.contains(resource.getId());
