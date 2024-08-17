@@ -48,6 +48,11 @@
     </div>
     <div class="mb-3">
         <label for="imageFile" class="form-label">Image</label>
+        <img
+                class="resource-img"
+                src="${form.imageUrl}"
+                alt="resource image"
+        />
         <input value="${form.imageFile}" type="file" id="imageFile" name="imageFile"
                class="form-control <c:if test="${bindingResult.hasFieldErrors('imageFile')}">is-invalid</c:if>"
         >
