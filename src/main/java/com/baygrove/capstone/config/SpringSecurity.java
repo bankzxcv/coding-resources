@@ -27,10 +27,10 @@ public class SpringSecurity {
 
         http.csrf(Customizer.withDefaults());
 //        http.csrf(csrf -> csrf.disable());
-
         http.authorizeRequests()
                 .requestMatchers(
                         new AntPathRequestMatcher("/admin/**"),
+                        new AntPathRequestMatcher("/user-list/**"),
                         new AntPathRequestMatcher("/account/**")).authenticated()
                 .anyRequest().permitAll();
 
