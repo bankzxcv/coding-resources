@@ -22,7 +22,10 @@
             integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
             crossorigin="anonymous"
     />
-
+    <script
+            src="https://kit.fontawesome.com/da84e60c83.js"
+            crossorigin="anonymous"
+    ></script>
     <link rel="stylesheet" href="/assets/css/styles.css"/>
     <title>Learn Coding Resources</title>
 </head>
