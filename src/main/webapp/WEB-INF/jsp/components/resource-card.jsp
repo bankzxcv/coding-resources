@@ -57,7 +57,7 @@
                     >MORE INFO</a>
                 </div>
 
-                <p class="card-text mt-3 gap-1 d-flex justify-content-end">
+                <p class="card-text mt-2 gap-1 d-flex justify-content-end flex-wrap">
                     <c:forEach items="${requestScope.resource.resourceTopics}" var="resourceTopic">
                         <c:set var="resourceTopic" value="${resourceTopic}" scope="request"/>
                         <jsp:include page="topic-chip.jsp"/>
