@@ -5,7 +5,6 @@ import com.baygrove.capstone.database.dao.ResourceDAO;
 import com.baygrove.capstone.database.dao.TopicDAO;
 import com.baygrove.capstone.database.entity.Resource;
 import com.baygrove.capstone.database.entity.Topic;
-import com.baygrove.capstone.database.enums.ResourceStatus;
 import com.baygrove.capstone.dto.ResourceDTO;
 import com.baygrove.capstone.form.ResourceFormBean;
 import com.baygrove.capstone.service.ResourceService;
@@ -46,8 +45,8 @@ public class ResourceController {
 
         List<ResourceDTO> resourceDTOs = resourceService.convertResourcesToResourceDTOsWithIsAddedProperty(resources);
         response.addObject("resources", resourceDTOs);
-
         response.addObject("topicName", topic.getName());
+
         return response;
     }
 
@@ -78,8 +77,7 @@ public class ResourceController {
         response.addObject("resources", resourceDTOs);
 
         response.addObject("searchTerm", search);
-
-
+        
         return response;
     }
 

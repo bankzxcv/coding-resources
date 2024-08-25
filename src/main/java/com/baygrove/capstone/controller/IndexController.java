@@ -2,7 +2,6 @@ package com.baygrove.capstone.controller;
 
 import com.baygrove.capstone.database.dao.ResourceDAO;
 import com.baygrove.capstone.database.dao.ResourceListDAO;
-import com.baygrove.capstone.database.dao.TopicDAO;
 import com.baygrove.capstone.database.dao.UserListDAO;
 import com.baygrove.capstone.database.entity.*;
 import com.baygrove.capstone.database.enums.ResourceStatus;
@@ -36,9 +35,6 @@ public class IndexController {
     @Autowired
     ResourceListDAO resourceListDAO;
 
-    @Autowired
-    private TopicDAO topicDAO;
-
     @GetMapping("/")
     public ModelAndView index(HttpSession session) {
         ModelAndView response = new ModelAndView("index");
@@ -50,8 +46,6 @@ public class IndexController {
         List<ResourceDTO> resourceDTOs = resourceService.convertResourcesToResourceDTOsWithIsAddedProperty(resources);
         response.addObject("resources", resourceDTOs);
 
-        List<Topic> topics = topicDAO.findAllByOrderByNameAsc();
-        session.setAttribute("topics", topics);
 
         return response;
     }

@@ -33,7 +33,6 @@ public class AuthController {
     @GetMapping("signup")
     public ModelAndView createAccount() {
         ModelAndView response = new ModelAndView("auth/sign-up-form");
-
         return response;
     }
 
@@ -72,6 +71,7 @@ public class AuthController {
     @GetMapping("login")
     public ModelAndView getLogin(HttpSession session) {
         ModelAndView response = new ModelAndView("auth/log-in-form");
+        session.setAttribute("userListId", userService.getCurrentUserDefaultListId());
 
         return response;
     }
