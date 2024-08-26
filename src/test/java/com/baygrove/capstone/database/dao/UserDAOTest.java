@@ -41,7 +41,7 @@ public class UserDAOTest {
     @Order(2)
     @ParameterizedTest
     @ValueSource(strings = {"test100@test.com", "TEST100@test.com", "TEST100@TEST.COM", "tEsT100@TEst.cOm"})
-    void shouldFindEmail(String email) {
+    public void shouldFindEmail(String email) {
         Assertions.assertNotNull(userDAO.findByEmailIgnoreCase(email));
     }
 
