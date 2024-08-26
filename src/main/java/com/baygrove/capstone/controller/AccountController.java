@@ -24,14 +24,16 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/account")
 public class AccountController {
 
-    @Autowired
-    AuthenticatedUserUtilities authenticatedUserUtilities;
+    private final AuthenticatedUserUtilities authenticatedUserUtilities;
+    private final UserDAO userDAO;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    UserDAO userDAO;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    public AccountController(AuthenticatedUserUtilities authenticatedUserUtilities, UserDAO userDAO, PasswordEncoder passwordEncoder) {
+        this.authenticatedUserUtilities = authenticatedUserUtilities;
+        this.userDAO = userDAO;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     @GetMapping("/settings")
     public ModelAndView getAccountSettings() {
