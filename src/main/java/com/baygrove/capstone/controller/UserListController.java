@@ -9,6 +9,7 @@ import com.baygrove.capstone.database.entity.UserList;
 import com.baygrove.capstone.dto.ResourceDTO;
 import com.baygrove.capstone.service.ResourceService;
 import com.baygrove.capstone.service.UserService;
+import com.baygrove.capstone.utils.resources.ResourceUtils;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,8 @@ public class UserListController {
 
     @Autowired
     private ResourceService resourceService;
+    @Autowired
+    private ResourceUtils resourceUtils;
 
     @GetMapping("/add-resource")
     public ModelAndView addResourceToUserList(@RequestParam Integer resourceId, @RequestParam(required = false) Integer userListId, HttpServletRequest request) {
@@ -61,7 +64,7 @@ public class UserListController {
 
         return response;
     }
-
+    
     @GetMapping("/remove-resource")
     public ModelAndView removeResourceFromUserList(@RequestParam Integer resourceId, @RequestParam Integer userListId, HttpServletRequest request) {
         ModelAndView response = new ModelAndView();
@@ -86,7 +89,7 @@ public class UserListController {
         List<Integer> resourceIds = resourceLists.stream().map(resourceList -> resourceList.getResourceId()).toList();
         List<Resource> resources = resourceDAO.findByIds(resourceIds);
 
-        List<ResourceDTO> resourceDTOs = resourceService.convertResourcesToResourceDTOsWithIsAddedProperty(resources);
+        List<ResourceDTO> resourceDTOs = resourceUtils.convertResourcesToResourceDTOsWithIsAddedProperty(resources);
         response.addObject("resources", resourceDTOs);
 
         return response;

@@ -8,6 +8,7 @@ import com.baygrove.capstone.database.enums.ResourceStatus;
 import com.baygrove.capstone.form.ResourceFormBean;
 import com.baygrove.capstone.security.AuthenticatedUserUtilities;
 import com.baygrove.capstone.service.ResourceService;
+import com.baygrove.capstone.utils.resources.ResourceUtils;
 import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,9 @@ public class AdminController {
     @Autowired
     ResourceService resourceService;
 
+    @Autowired
+    ResourceUtils resourceUtils;
+
 
     @GetMapping("/dashboard")
     public ModelAndView adminDashboard(@RequestParam(required = false) ResourceStatus status) {
@@ -66,7 +70,7 @@ public class AdminController {
     @GetMapping("add-new-resource")
     public ModelAndView addNewResource() {
         ModelAndView response = new ModelAndView("admin/resource-form");
-        resourceService.addResourceFormOptions(response);
+        resourceUtils.addResourceFormOptions(response);
         return response;
     }
 
@@ -104,7 +108,7 @@ public class AdminController {
 
             response.addObject("bindingResult", bindingResult);
             response.addObject("form", form);
-            resourceService.addResourceFormOptions(response);
+            resourceUtils.addResourceFormOptions(response);
 
             response.setViewName("admin/resource-form");
             return response;
@@ -113,7 +117,7 @@ public class AdminController {
         if (form.getId() == null) {
             resourceService.createResource(form);
         } else {
-            resourceService.editResource(form);
+            resourceService.updateResource(form);
         }
 
         if (authenticatedUserUtilities.isUserInRole("ADMIN")) {

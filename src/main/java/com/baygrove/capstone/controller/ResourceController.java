@@ -8,6 +8,7 @@ import com.baygrove.capstone.database.entity.Topic;
 import com.baygrove.capstone.dto.ResourceDTO;
 import com.baygrove.capstone.form.ResourceFormBean;
 import com.baygrove.capstone.service.ResourceService;
+import com.baygrove.capstone.utils.resources.ResourceUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,6 +37,9 @@ public class ResourceController {
     @Autowired
     private ResourceService resourceService;
 
+    @Autowired
+    private ResourceUtils resourceUtils;
+
     @GetMapping("/topics/{id}")
     public ModelAndView resourcesByTopic(@PathVariable(name = "id") Integer topicId) {
         ModelAndView response = new ModelAndView("resource/resources-by-topic");
@@ -43,7 +47,7 @@ public class ResourceController {
         List<Resource> resources = resourceDAO.findPublishResourcesByTopicId(topicId);
         Topic topic = topicDAO.findById(topicId);
 
-        List<ResourceDTO> resourceDTOs = resourceService.convertResourcesToResourceDTOsWithIsAddedProperty(resources);
+        List<ResourceDTO> resourceDTOs = resourceUtils.convertResourcesToResourceDTOsWithIsAddedProperty(resources);
         response.addObject("resources", resourceDTOs);
         response.addObject("topicName", topic.getName());
 
@@ -59,9 +63,9 @@ public class ResourceController {
 
         Resource resource = resourceDAO.findById(resourceId);
 
-        Set<Integer> addedResourceIdSet = resourceService.getCurrentUserAddedResourceIdSet();
+        Set<Integer> addedResourceIdSet = resourceUtils.getCurrentUserAddedResourceIdSet();
         boolean isAdded = addedResourceIdSet.contains(resource.getId());
-        ResourceDTO resourceDTO = resourceService.convertResourceToResourceDTO(resource, isAdded ? 1 : 0);
+        ResourceDTO resourceDTO = resourceUtils.convertResourceToResourceDTO(resource, isAdded ? 1 : 0);
 
         response.addObject("resource", resourceDTO);
         return response;
@@ -73,11 +77,11 @@ public class ResourceController {
 
         List<Resource> resources = resourceDAO.findPublishResourcesByNameLike(search);
 
-        List<ResourceDTO> resourceDTOs = resourceService.convertResourcesToResourceDTOsWithIsAddedProperty(resources);
+        List<ResourceDTO> resourceDTOs = resourceUtils.convertResourcesToResourceDTOsWithIsAddedProperty(resources);
         response.addObject("resources", resourceDTOs);
 
         response.addObject("searchTerm", search);
-        
+
         return response;
     }
 
@@ -99,7 +103,7 @@ public class ResourceController {
 
         response.addObject("form", form);
 
-        resourceService.addResourceFormOptions(response);
+        resourceUtils.addResourceFormOptions(response);
         return response;
     }
 }

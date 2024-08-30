@@ -8,6 +8,7 @@ import com.baygrove.capstone.database.enums.ResourceStatus;
 import com.baygrove.capstone.dto.ResourceDTO;
 import com.baygrove.capstone.service.ResourceService;
 import com.baygrove.capstone.service.UserService;
+import com.baygrove.capstone.utils.resources.ResourceUtils;
 import jakarta.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,7 @@ public class IndexController {
     UserService userService;
 
     @Autowired
-    ResourceService resourceService;
+    ResourceUtils resourceUtils;
 
     @Autowired
     ResourceListDAO resourceListDAO;
@@ -42,8 +43,8 @@ public class IndexController {
         // TODO: Fix this? resource's topics relationships are not included
         session.setAttribute("userListId", userService.getCurrentUserDefaultListId());
 
-        List<Resource> resources = resourceDAO.findByStatus(ResourceStatus.Publish);
-        List<ResourceDTO> resourceDTOs = resourceService.convertResourcesToResourceDTOsWithIsAddedProperty(resources);
+        List<ResourceDTO> resourceDTOs = resourceUtils.getAllResourceDTOs();
+
         response.addObject("resources", resourceDTOs);
 
 
