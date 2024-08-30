@@ -11,6 +11,9 @@ import com.baygrove.capstone.form.ResourceFormBean;
 import com.baygrove.capstone.utils.resources.ResourceUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
@@ -39,11 +42,14 @@ public class ResourceService {
     @Autowired
     ResourceUtils resourceUtils;
 
+    @Cacheable(value = "resources")
     public List<Resource> getAllResources() {
         log.info("getAllResources is called!!!");
         return resourceDAO.findByStatus(ResourceStatus.Publish);
     }
 
+    // clear the entire cache when adding or updating resources
+    @CacheEvict(value = "resources", allEntries = true)
     public Resource createResource(ResourceFormBean form) throws Exception {
         Resource resource = new Resource();
 
@@ -67,7 +73,8 @@ public class ResourceService {
         return resource;
     }
 
-
+    @CachePut(value = "resource", key = "#form.id")
+    @CacheEvict(value = "resources", allEntries = true)
     public Resource updateResource(ResourceFormBean form) throws Exception {
         Resource resource = resourceDAO.findById(form.getId());
 
