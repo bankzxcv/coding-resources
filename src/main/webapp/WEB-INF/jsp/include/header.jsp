@@ -90,9 +90,26 @@
                         Topics
                     </a>
                     <ul class="dropdown-menu">
-                        <c:forEach items="${sessionScope.topics}" var="topic">
-                            <li><a class="dropdown-item" href="/resources/topics/${topic.id}">${topic.name}</a></li>
-                        </c:forEach>
+                        <%--                        <c:forEach items="${sessionScope.topics}" var="topic">--%>
+                        <%--                            <li><a class="dropdown-item" href="/resources/topics/${topic.id}">${topic.name}</a></li>--%>
+                        <%--                        </c:forEach>--%>
+                        <li><a class="dropdown-item" href="/resources/topics/7">Algorithms</a></li>
+                        <li><a class="dropdown-item" href="/resources/topics/2">CSS</a></li>
+                        <li><a class="dropdown-item" href="/resources/topics/5">Data Analysis</a></li>
+                        <li><a class="dropdown-item" href="/resources/topics/8">Data Structures</a></li>
+                        <li><a class="dropdown-item" href="/resources/topics/4">Data Visualization</a></li>
+                        <li><a class="dropdown-item" href="/resources/topics/13">Git</a></li>
+                        <li><a class="dropdown-item" href="/resources/topics/1">HTML</a></li>
+                        <li><a class="dropdown-item" href="/resources/topics/6">Interview Prep</a></li>
+                        <li><a class="dropdown-item" href="/resources/topics/9">Java</a></li>
+                        <li><a class="dropdown-item" href="/resources/topics/3">JavaScript</a></li>
+                        <li><a class="dropdown-item" href="/resources/topics/16">Node.js</a></li>
+                        <li><a class="dropdown-item" href="/resources/topics/10">Python</a></li>
+                        <li><a class="dropdown-item" href="/resources/topics/12">React.js</a></li>
+                        <li><a class="dropdown-item" href="/resources/topics/14">Ruby</a></li>
+                        <li><a class="dropdown-item" href="/resources/topics/15">Ruby on Rails</a></li>
+                        <li><a class="dropdown-item" href="/resources/topics/11">SQL</a></li>
+
                     </ul>
                 </li>
                 <sec:authorize access="!isAuthenticated()">
