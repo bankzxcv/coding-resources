@@ -1,6 +1,5 @@
 package com.baygrove.capstone.controller;
 
-
 import com.baygrove.capstone.database.dao.ResourceDAO;
 import com.baygrove.capstone.database.dao.TopicDAO;
 import com.baygrove.capstone.database.entity.Resource;
@@ -49,7 +48,13 @@ public class ResourceController {
 
         List<ResourceDTO> resourceDTOs = resourceUtils.convertResourcesToResourceDTOsWithIsAddedProperty(resources);
         response.addObject("resources", resourceDTOs);
-        response.addObject("topicName", topic.getName());
+        
+        // Handle case where topic is not found
+        if (topic != null) {
+            response.addObject("topicName", topic.getName());
+        } else {
+            response.addObject("topicName", "Topic Not Found");
+        }
 
         return response;
     }
